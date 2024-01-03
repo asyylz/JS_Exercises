@@ -149,15 +149,15 @@ console.log(tribonacci1([3, 2, 1], 10));
 //   }
 // }
 //Solution 2:
-function likes(names) {
-  return {
-    0: "no one likes this",
-    1: `${names[0]} likes this`,
-    2: `${names[0]} and ${names[1]} like this`,
-    3: `${names[0]}, ${names[1]} and ${names[2]} like this`,
-    4: `${names[0]}, ${names[1]} and ${names.length - 2} others like this`,
-  }[Math.min(4, names.length)];
-}
+// function likes(names) {
+//   return {
+//     0: "no one likes this",
+//     1: `${names[0]} likes this`,
+//     2: `${names[0]} and ${names[1]} like this`,
+//     3: `${names[0]}, ${names[1]} and ${names[2]} like this`,
+//     4: `${names[0]}, ${names[1]} and ${names.length - 2} others like this`,
+//   }[Math.min(4, names.length)];
+// }
 
 //Solution 3:
 function likes(names) {
@@ -276,7 +276,7 @@ const str = "({})";
 console.log(str.indexOf("()"));
 
 /* ------------------------------------------------------ */
-/*           Product of consecutive Fib numbers           */
+/*        Q5:Product of consecutive Fib numbers           */
 /* ------------------------------------------------------ */
 //Solution 1:
 // function productFib(prod) {
@@ -311,7 +311,7 @@ console.log(str.indexOf("()"));
 //Solution 3:
 // function productFib(prod){
 //   var n = 0;
-//   var nPlus = 1;  
+//   var nPlus = 1;
 //   while(n*nPlus < prod) {
 //     nPlus = n + nPlus;
 //     n = nPlus - n;
@@ -320,9 +320,9 @@ console.log(str.indexOf("()"));
 // }
 
 //Solution 4:
-function productFib(prod){
+function productFib(prod) {
   let [a, b] = [0, 1];
-  while(a * b < prod) [a, b] = [b, a + b];
+  while (a * b < prod) [a, b] = [b, a + b];
   return [a, b, a * b === prod];
 }
 
@@ -330,3 +330,82 @@ function productFib(prod){
 console.log(productFib(193864606));
 console.log(productFib(74049690));
 console.log(productFib(84049690));
+
+/* ------------------------------------------------------ */
+/*                  Q6:Enough is enough!                  */
+/* ------------------------------------------------------ */
+//Solution 1:
+// function deleteNth(arr,n) {
+//   const occurrences = {};
+//   const result = [];
+//   for (const element of arr) {
+//     if (!occurrences[element]) {
+      
+//       occurrences[element] = 1;
+//       result.push(element);
+//     } else if (occurrences[element] < n) {
+//       occurrences[element]++;
+//       result.push(element);
+//     } 
+//   }
+//   console.log(result)
+
+// }
+ //Solution 2:
+// function deleteNth(arr) {
+//   const occurrences = {};
+
+//   for (let i = 0; i < arr.length; i++) {
+//     let count = occurrences[arr[i]] || 0;
+
+//     if (count < 2) {
+//       occurrences[arr[i]] = (count || 0) + 1;
+//     }
+//   }
+
+//   const result = Object.keys(occurrences).map(Number);
+//   return result;
+// }
+
+//Solution 3:
+function deleteNth(arr,x) {
+  var cache = {};
+  console.log(cache)
+  return arr.filter(function(n) {
+    cache[n] = (cache[n]||0) + 1;
+    return cache[n] <= x;
+  });
+}
+
+//Solution 4:
+// function deleteNth(arr, maxOccurrences) {
+//   // Create an object to keep track of occurrences of each element
+//   const occurrences = {};
+
+//   // Use the filter method to create a new array with the desired elements
+//   return arr.filter((element) => {
+//     // Check the count of the current element in occurrences object
+//     const count = occurrences[element] || 0;
+    
+//     // If the count is less than the maxOccurrences, include the element
+//     if (count < maxOccurrences) {
+//       // Increment the count for the current element in occurrences
+//       occurrences[element] = count + 1;
+//       return true;
+//     }
+
+//     // If the count exceeds or equals maxOccurrences, exclude the element
+//     return false;
+//   });
+// }
+
+//Test Data:
+console.log(deleteNth([20, 37, 20, 20,20, 21],2)); //OutPut:[20,37,21]
+console.log(deleteNth([1,1,3,3,7,2,2,2,2], 3))
+
+//const deleteNth = (arr,x) => arr.filter((e,i)=> arr.slice(0,i).filter(f=>f== e).length < x );
+
+/* ------------------------------------------------------ */
+/*              Write Number in Expanded Form             */
+/* ------------------------------------------------------ */
+//Solution 1:
