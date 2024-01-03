@@ -1,0 +1,67 @@
+{
+  "textmarker.savedHighlights": [
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "//Solution 3:",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkslateblue"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "//Solution 4:",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkslategray"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* ------------------------------------------------------ */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkgoldenrod"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "// Test cases",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkviolet"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "//Solution 1:",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkmagenta"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "//Solution 2:",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkolivegreen"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "//Test Data:",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkblue"
+    }
+  ]
+}

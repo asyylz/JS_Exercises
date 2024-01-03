@@ -1,5 +1,7 @@
 "use strict";
-/* ----------------- Q1: Is a number prime? ----------------- */
+/* ------------------------------------------------------ */
+/*                 Q1: Is a number prime?                 */
+/* ------------------------------------------------------ */
 
 //Solution 1:
 // function isPrime(num) {
@@ -272,3 +274,59 @@ console.log(validBraces("[({})](]")); // false
 
 const str = "({})";
 console.log(str.indexOf("()"));
+
+/* ------------------------------------------------------ */
+/*           Product of consecutive Fib numbers           */
+/* ------------------------------------------------------ */
+//Solution 1:
+// function productFib(prod) {
+//   const fibArr = [0, 1];
+//   const product = [];
+//   for (let i = 0; i < 50; i++) {
+//     fibArr.push(fibArr[i] + fibArr[i + 1]);
+//     if (fibArr[i] * fibArr[i + 1] === prod) {
+//       return [fibArr[i], fibArr[i + 1], true];
+//     } else  if (fibArr[i] * fibArr[i + 1] > prod){
+//       return [fibArr[i], fibArr[i + 1], false]
+//     }
+//   }
+// }
+
+//Solution 2:
+// function productFib(prod) {
+//   const fibArr = [0, 1];
+//   let i = 2;
+//   while (true) {
+//     fibArr.push(fibArr[i - 1] + fibArr[i - 2]);
+
+//     if (fibArr[i - 1] * fibArr[i] === prod) {
+//       return [fibArr[i - 1], fibArr[i], true];
+//     } else if (fibArr[i - 1] * fibArr[i] > prod) {
+//       return [fibArr[i - 1], fibArr[i], false];
+//     }
+//     i++;
+//   }
+// }
+
+//Solution 3:
+// function productFib(prod){
+//   var n = 0;
+//   var nPlus = 1;  
+//   while(n*nPlus < prod) {
+//     nPlus = n + nPlus;
+//     n = nPlus - n;
+//   }
+//   return [n, nPlus, n*nPlus===prod];
+// }
+
+//Solution 4:
+function productFib(prod){
+  let [a, b] = [0, 1];
+  while(a * b < prod) [a, b] = [b, a + b];
+  return [a, b, a * b === prod];
+}
+
+//Test Data:
+console.log(productFib(193864606));
+console.log(productFib(74049690));
+console.log(productFib(84049690));
