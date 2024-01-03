@@ -335,23 +335,22 @@ console.log(productFib(84049690));
 /*                  Q6:Enough is enough!                  */
 /* ------------------------------------------------------ */
 //Solution 1:
-// function deleteNth(arr,n) {
-//   const occurrences = {};
-//   const result = [];
-//   for (const element of arr) {
-//     if (!occurrences[element]) {
-      
-//       occurrences[element] = 1;
-//       result.push(element);
-//     } else if (occurrences[element] < n) {
-//       occurrences[element]++;
-//       result.push(element);
-//     } 
-//   }
-//   console.log(result)
+function deleteNth(arr, n) {
+  const occurrences = {};
+  const result = [];
+  for (const element of arr) {
+    if (!occurrences[element]) {
+      occurrences[element] = 1;
+      result.push(element);
+    } else if (occurrences[element] < n) {
+      occurrences[element]++;
+      result.push(element);
+    }
+  }
+  console.log(result);
+}
 
-// }
- //Solution 2:
+//Solution 2:
 // function deleteNth(arr) {
 //   const occurrences = {};
 
@@ -368,11 +367,11 @@ console.log(productFib(84049690));
 // }
 
 //Solution 3:
-function deleteNth(arr,x) {
+function deleteNth(arr, x) {
   var cache = {};
-  console.log(cache)
-  return arr.filter(function(n) {
-    cache[n] = (cache[n]||0) + 1;
+  console.log(cache);
+  return arr.filter(function (n) {
+    cache[n] = (cache[n] || 0) + 1;
     return cache[n] <= x;
   });
 }
@@ -386,7 +385,7 @@ function deleteNth(arr,x) {
 //   return arr.filter((element) => {
 //     // Check the count of the current element in occurrences object
 //     const count = occurrences[element] || 0;
-    
+
 //     // If the count is less than the maxOccurrences, include the element
 //     if (count < maxOccurrences) {
 //       // Increment the count for the current element in occurrences
@@ -400,12 +399,219 @@ function deleteNth(arr,x) {
 // }
 
 //Test Data:
-console.log(deleteNth([20, 37, 20, 20,20, 21],2)); //OutPut:[20,37,21]
-console.log(deleteNth([1,1,3,3,7,2,2,2,2], 3))
+console.log(deleteNth([20, 37, 20, 20, 20, 21], 2)); //OutPut:[20,37,21]
+console.log(deleteNth([1, 1, 3, 3, 7, 2, 2, 2, 2], 3));
 
 //const deleteNth = (arr,x) => arr.filter((e,i)=> arr.slice(0,i).filter(f=>f== e).length < x );
 
 /* ------------------------------------------------------ */
-/*              Write Number in Expanded Form             */
+/*           Q7:Write Number in Expanded Form             */
 /* ------------------------------------------------------ */
 //Solution 1:
+// function expandedForm(num) {
+//   const expanded = [];
+//   const last = [];
+//   for (let i = 1; i < num.toString().length; i++) {
+//     const starting = num % 10 ** (num.toString().length - i);
+//     expanded.push(starting);
+//     if (starting < 10) {
+//       last.push(num - expanded[0]);
+//       for (let n = 0; n < expanded.length - 1; n++) {
+//         last.push(Math.abs(expanded[n] - expanded[n + 1]));
+//       }
+//       last.push(expanded[expanded.length - 1]);
+//       return last.filter(number => number !== 0).join(' + ');
+//     }
+//   }
+// }
+
+//Solution 2:
+// function expandedForm(num) {
+//   const numString = num.toString();
+//   const expand = [];
+//   for (let i = 0; i < num.toString().length; i++) {
+//     const placeValue = numString[i] * 10 ** ((num.toString().length) - i - 1);
+//     expand.push(placeValue)
+//   }
+//   return expand.filter(number => number !== 0).join(' + ');
+// }
+
+//Solution 3:
+// function expandedForm(num) {
+//   return String(num)
+//     .split("")
+//     .map((num, index, arr) => +"0".repeat(arr.length - index - 1))
+//     .filter((num) => Number(num) != 0)
+//     .join(" + ");
+// }
+
+//Solution 4:
+// const expandedForm = n => n.toString()
+//                             .split("")
+//                             .reverse()
+//                             .map( (a, i) => a * Math.pow(10, i))
+//                             .filter(a => a > 0)
+//                             .reverse()
+//                             .join(" + ");
+
+
+                           
+//Solution 5:                                                     
+function expandedForm(num) {
+	num = String(num);
+	let result = [];
+	for (var i = 0; i < num.length; i++) {
+		if (num[i] == 0) continue;
+		else result.push(num[i] + "0".repeat(num.length -i -1))
+	}
+	return result.join(" + ")
+}
+
+//Test Data:
+console.log(expandedForm(12));
+console.log(expandedForm(42));
+console.log(expandedForm(42869574603));
+console.log(expandedForm(70304));
+
+const str2 = "asiye";
+console.log(str2.split('').map((value, key, map) => value.repeat(5))) 
+
+/* ------------------------------------------------------ */
+/*            Q8:Calculating with Functions               */
+/* ------------------------------------------------------ */
+//Solution 1:
+// function number(value) {
+//   return function (operation) {
+//     return operation ? operation(value) : value;
+//   };
+// }
+
+// function operation(func, num) {
+//   return func ? func(num) : num;
+// }
+
+// function zero(operation) {
+//   return number(0)(operation);
+// }
+
+// function one(operation) {
+//   return number(1)(operation);
+// }
+
+// function two(operation) {
+//   return number(2)(operation);
+// }
+
+// function three(operation) {
+//   return number(3)(operation);
+// }
+
+// function four(operation) {
+//   return number(4)(operation);
+// }
+
+// function five(operation) {
+//   return number(5)(operation);
+// }
+
+// function six(operation) {
+//   return number(6)(operation);
+// }
+
+// function seven(operation) {
+//   return number(7)(operation);
+// }
+
+// function eight(operation) {
+//   return number(8)(operation);
+// }
+
+// function nine(operation) {
+//   return number(9)(operation);
+// }
+
+// function plus(num) {
+//   return function (value) {
+//     return value + num;
+//   };
+// }
+
+// function minus(num) {
+//   return function (value) {
+//     return value - num;
+//   };
+// }
+
+// function times(num) {
+//   return function (value) {
+//     return value * num;
+//   };
+// }
+
+// function dividedBy(num) {
+//   return function (value) {
+//     return Math.floor(value / num);
+//   };
+// }
+
+//Solution 2:
+const [zero, one, two, three, four, five, six, seven, eight, nine] = [...Array(10)].map((_, idx) => fn => fn ? fn(idx) : idx);
+const [plus, minus, times, dividedBy] = [`+`, `-`, `*`, `/`].map(val => new Function(`b`, `return a => a ${val} b ^ 0`));
+
+//Solution 3:
+// const zero  = (func) => func ? func(0) : 0;
+// const one   = (func) => func ? func(1) : 1;
+// const two   = (func) => func ? func(2) : 2;
+// const three = (func) => func ? func(3) : 3;
+// const four  = (func) => func ? func(4) : 4;
+// const five  = (func) => func ? func(5) : 5;
+// const six   = (func) => func ? func(6) : 6;
+// const seven = (func) => func ? func(7) : 7;
+// const eight = (func) => func ? func(8) : 8;
+// const nine  = (func) => func ? func(9) : 9;
+
+// const plus      = (x) => (num) => num + x;
+// const minus     = (x) => (num) => num - x;
+// const times     = (x) => (num) => num * x;
+// const dividedBy = (x) => (num) => ~~(num / x);
+
+
+//Solution 4:
+// function number(num) {
+//   return function () {
+//     if (arguments.length === 0) {
+//       return num
+//     } else {
+//       return Math.floor(eval(num + arguments[0]))
+//     } 
+//   }
+// }
+
+// function method(met) {
+//   return (val) => met + val
+// }
+
+// const zero = number(0),
+// one = number(1),
+// two = number(2),
+// three = number(3),
+// four = number(4),
+// five = number(5),
+// six = number(6),
+// seven = number(7),
+// eight = number(8),
+// nine = number(9),
+// plus = method('+'),
+// minus = method('-'),
+// times = method('*'),
+// dividedBy = method('/');
+
+//Test Data:
+//console.log(seven(times(five()))); // Output: 35
+//console.log(four(plus(nine()))); // Output: 13
+//console.log(eight(minus(three()))); // Output: 5
+//console.log(six(dividedBy(two()))); // Output: 3
+
+/* ------------------------------------------------------ */
+/*              Q9:Regex Password Validation              */
+/* ------------------------------------------------------ */

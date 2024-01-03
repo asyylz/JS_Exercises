@@ -71,6 +71,15 @@
         "wholeMatch": false
       },
       "color": "darkturquoise"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "//Solution 5: ",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkgray"
     }
   ]
 }
