@@ -454,17 +454,15 @@ console.log(deleteNth([1, 1, 3, 3, 7, 2, 2, 2, 2], 3));
 //                             .reverse()
 //                             .join(" + ");
 
-
-                           
-//Solution 5:                                                     
+//Solution 5:
 function expandedForm(num) {
-	num = String(num);
-	let result = [];
-	for (var i = 0; i < num.length; i++) {
-		if (num[i] == 0) continue;
-		else result.push(num[i] + "0".repeat(num.length -i -1))
-	}
-	return result.join(" + ")
+  num = String(num);
+  let result = [];
+  for (var i = 0; i < num.length; i++) {
+    if (num[i] == 0) continue;
+    else result.push(num[i] + "0".repeat(num.length - i - 1));
+  }
+  return result.join(" + ");
 }
 
 //Test Data:
@@ -474,7 +472,7 @@ console.log(expandedForm(42869574603));
 console.log(expandedForm(70304));
 
 const str2 = "asiye";
-console.log(str2.split('').map((value, key, map) => value.repeat(5))) 
+console.log(str2.split("").map((value, key, map) => value.repeat(5)));
 
 /* ------------------------------------------------------ */
 /*            Q8:Calculating with Functions               */
@@ -555,8 +553,12 @@ console.log(str2.split('').map((value, key, map) => value.repeat(5)))
 // }
 
 //Solution 2:
-const [zero, one, two, three, four, five, six, seven, eight, nine] = [...Array(10)].map((_, idx) => fn => fn ? fn(idx) : idx);
-const [plus, minus, times, dividedBy] = [`+`, `-`, `*`, `/`].map(val => new Function(`b`, `return a => a ${val} b ^ 0`));
+const [zero, one, two, three, four, five, six, seven, eight, nine] = [
+  ...Array(10),
+].map((_, idx) => (fn) => fn ? fn(idx) : idx);
+const [plus, minus, times, dividedBy] = [`+`, `-`, `*`, `/`].map(
+  (val) => new Function(`b`, `return a => a ${val} b ^ 0`)
+);
 
 //Solution 3:
 // const zero  = (func) => func ? func(0) : 0;
@@ -575,7 +577,6 @@ const [plus, minus, times, dividedBy] = [`+`, `-`, `*`, `/`].map(val => new Func
 // const times     = (x) => (num) => num * x;
 // const dividedBy = (x) => (num) => ~~(num / x);
 
-
 //Solution 4:
 // function number(num) {
 //   return function () {
@@ -583,7 +584,7 @@ const [plus, minus, times, dividedBy] = [`+`, `-`, `*`, `/`].map(val => new Func
 //       return num
 //     } else {
 //       return Math.floor(eval(num + arguments[0]))
-//     } 
+//     }
 //   }
 // }
 
@@ -613,5 +614,131 @@ const [plus, minus, times, dividedBy] = [`+`, `-`, `*`, `/`].map(val => new Func
 //console.log(six(dividedBy(two()))); // Output: 3
 
 /* ------------------------------------------------------ */
-/*              Q9:Regex Password Validation              */
+/*                         Q9:Secret                      */
 /* ------------------------------------------------------ */
+
+// function recoverSecret(triplets) {
+//   const uniqueChars = new Set();
+//   triplets.forEach(triplet => {
+//     triplet.forEach(char => uniqueChars.add(char));
+//   });
+
+//   const graph = new Map();
+//   uniqueChars.forEach(char => graph.set(char, []));
+
+//   triplets.forEach(triplet => {
+//     const [char1, char2, char3] = triplet;
+//     graph.get(char1).push(char2);
+//     graph.get(char2).push(char3);
+//   });
+
+//   const visited = new Set();
+//   const result = [];
+
+//   function topologicalSort(node) {
+//     if (!visited.has(node)) {
+//       visited.add(node);
+//       graph.get(node).forEach(neighbor => topologicalSort(neighbor));
+//       result.unshift(node);
+//     }
+//   }
+
+//   uniqueChars.forEach(char => topologicalSort(char));
+
+//   return result.join('');
+// }
+
+// // Example Usage:
+// const triplets = [
+//   ['t', 'u', 'p'],
+//   ['w', 'h', 'i'],
+//   ['t', 's', 'u'],
+//   ['a', 't', 's'],
+//   ['h', 'a', 'p'],
+//   ['t', 'i', 's'],
+//   ['w', 'h', 'a']
+// ];
+
+// console.log(recoverSecret(triplets)); // Output: "whatisup"
+
+/* ------------------------------------------------------ */
+/*                   Pyramid Slide Down                   */
+/* ------------------------------------------------------ */
+//Solution 1:
+// function longestSlideDown(pyramid) {
+//   const sum = new Map([pyramid[0]]);
+//   pyramid.forEach((array) => {
+//     array.length === 1
+//       ? sum.set(array[array.length - 1])
+//       : sum.set(array[array.length - 2]);
+//   });
+//   const totalSum = Array.from(sum.keys()).reduce((acc,value) => acc + value,0)
+//   console.log(totalSum)
+// }
+
+//Solution 2:
+const pyramid = [
+  [75],
+  [95, 64],
+  [17, 47, 82],
+  [18, 35, 87, 10],
+  [20, 4, 82, 47, 65],
+  [19, 1, 23, 75, 3, 34],
+  [88, 2, 77, 73, 7, 63, 67],
+  [99, 65, 4, 28, 6, 16, 70, 92],
+  [41, 41, 26, 56, 83, 40, 80, 70, 33],
+  [41, 48, 72, 33, 47, 32, 37, 16, 94, 29],
+  [53, 71, 44, 65, 25, 43, 91, 52, 97, 51, 14],
+  [70, 11, 33, 28, 77, 73, 17, 78, 39, 68, 17, 57],
+  [91, 71, 52, 38, 17, 14, 91, 43, 58, 50, 27, 29, 48],
+  [63, 66, 4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31],
+  [4, 62, 98, 27, 23, 9, 70, 98, 73, 93, 38, 53, 60, 4, 23],
+];
+
+// function largestSlideDown(pyramid) {
+//   for (let row = pyramid.length - 2; row >= 0; row--) {
+//     for (let col = 0; col <= row; col++) {
+//       pyramid[row][col] += Math.max(
+//         pyramid[row + 1][col],
+//         pyramid[row + 1][col + 1]
+//       );
+//     }
+//   }
+//   return console.log(pyramid[0][0]);
+// }
+// largestSlideDown(pyramid)
+
+//Solution 3:
+function largestSlideDown(pyramid) {
+  function updatePyramid() {
+    for (let row = pyramid.length - 2; row >= 0; row--) {
+      console.log(pyramid.length);
+      for (let col = 0; col <= row; col++) {
+        pyramid[row][col] += Math.max(
+          pyramid[row + 1][col],
+          pyramid[row + 1][col + 1]
+        );
+      }
+    }
+  }
+  function printResult() {
+    console.log(pyramid[0][0]);
+  }
+  updatePyramid();
+  printResult();
+}
+largestSlideDown(pyramid);
+
+//Solution 4:
+// function longestSlideDown (pyramid) {
+//   return pyramid.reduceRight((last,current)=>current.map(
+//     (v,i)=>v+Math.max(last[i],last[i+1])
+//   ))[0];
+// }
+
+//Solution 5:
+// const longestSlideDown = pyramid => (
+//   pyramid.reduceRight((lower, current) => (
+//     current.map((v, i) => (lower[i] > lower[i+1]) ? v + lower[i] : v + lower[i+1])
+//   ))[0]
+// );
