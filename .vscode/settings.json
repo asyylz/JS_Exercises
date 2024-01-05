@@ -80,6 +80,24 @@
         "wholeMatch": false
       },
       "color": "darkgray"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "//Solution 5:",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkkhaki"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "//Solution 6:",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkorange"
     }
   ]
 }

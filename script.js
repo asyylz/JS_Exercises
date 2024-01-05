@@ -664,36 +664,66 @@ const [plus, minus, times, dividedBy] = [`+`, `-`, `*`, `/`].map(
 /* ------------------------------------------------------ */
 /*                  Q10:Pyramid Slide Down                   */
 /* ------------------------------------------------------ */
+// const pyramid = [
+//   [75],
+//   [95, 64],
+//   [17, 47, 82],
+//   [18, 35, 87, 10],
+//   [20, 4, 82, 47, 65],
+//   [19, 1, 23, 75, 3, 34],
+//   [88, 2, 77, 73, 7, 63, 67],
+//   [99, 65, 4, 28, 6, 16, 70, 92],
+//   [41, 41, 26, 56, 83, 40, 80, 70, 33],
+//   [41, 48, 72, 33, 47, 32, 37, 16, 94, 29],
+//   [53, 71, 44, 65, 25, 43, 91, 52, 97, 51, 14],
+//   [70, 11, 33, 28, 77, 73, 17, 78, 39, 68, 17, 57],
+//   [91, 71, 52, 38, 17, 14, 91, 43, 58, 50, 27, 29, 48],
+//   [63, 66, 4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31],
+//   [4, 62, 98, 27, 23, 9, 70, 98, 73, 93, 38, 53, 60, 4, 23],
+// ];
 //Solution 1:
-// function longestSlideDown(pyramid) {
-//   const sum = new Map([pyramid[0]]);
-//   pyramid.forEach((array) => {
-//     array.length === 1
-//       ? sum.set(array[array.length - 1])
-//       : sum.set(array[array.length - 2]);
-//   });
-//   const totalSum = Array.from(sum.keys()).reduce((acc,value) => acc + value,0)
-//   console.log(totalSum)
+// function gett(arr) {
+//   if(arr.length === 1) {
+//       console.log(arr[0][0]);
+//       return;
+//   }
+  
+//   const lastRow = arr.pop();
+//   arr[arr.length-1] = sum(arr[arr.length-1], lastRow);
+  
+//   return gett(arr);
 // }
 
-//Solution 2:
-const pyramid = [
-  [75],
-  [95, 64],
-  [17, 47, 82],
-  [18, 35, 87, 10],
-  [20, 4, 82, 47, 65],
-  [19, 1, 23, 75, 3, 34],
-  [88, 2, 77, 73, 7, 63, 67],
-  [99, 65, 4, 28, 6, 16, 70, 92],
-  [41, 41, 26, 56, 83, 40, 80, 70, 33],
-  [41, 48, 72, 33, 47, 32, 37, 16, 94, 29],
-  [53, 71, 44, 65, 25, 43, 91, 52, 97, 51, 14],
-  [70, 11, 33, 28, 77, 73, 17, 78, 39, 68, 17, 57],
-  [91, 71, 52, 38, 17, 14, 91, 43, 58, 50, 27, 29, 48],
-  [63, 66, 4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31],
-  [4, 62, 98, 27, 23, 9, 70, 98, 73, 93, 38, 53, 60, 4, 23],
-];
+//Solution 2: Recursive
+// function gett(arr) {
+//   if(arr.length === 1) {
+//       console.log(arr[0][0]);
+//       return;
+//   }
+  
+//   const lastRow = arr.pop();
+//   arr[arr.length-1] = sum(arr[arr.length-1], lastRow);
+  
+//   return gett(arr);
+// }
+
+// function sum(arr1, arr2) {
+//   return arr1.map((v,i) => v + Math.max(
+//       arr2[i],
+//       arr2[i + 1]
+//   ));
+// }
+
+// gett(pyramid);
+//Solution 3:
+// function sum(arr1, arr2) {
+//   return arr1.map((v,i) => v + Math.max(
+//       arr2[i],
+//       arr2[i + 1]
+//   ));
+// }
+
+// gett(pyramid);
 
 // function largestSlideDown(pyramid) {
 //   for (let row = pyramid.length - 2; row >= 0; row--) {
@@ -708,35 +738,35 @@ const pyramid = [
 // }
 // largestSlideDown(pyramid)
 
-//Solution 3:
-function largestSlideDown(pyramid) {
-  function updatePyramid() {
-    for (let row = pyramid.length - 2; row >= 0; row--) {
-      console.log(pyramid.length);
-      for (let col = 0; col <= row; col++) {
-        pyramid[row][col] += Math.max(
-          pyramid[row + 1][col],
-          pyramid[row + 1][col + 1]
-        );
-      }
-    }
-  }
-  function printResult() {
-    console.log(pyramid[0][0]);
-  }
-  updatePyramid();
-  printResult();
-}
-largestSlideDown(pyramid);
-
 //Solution 4:
+// function largestSlideDown(pyramid) {
+//   function updatePyramid() {
+//     for (let row = pyramid.length - 2; row >= 0; row--) {
+//       console.log(pyramid.length);
+//       for (let col = 0; col <= row; col++) {
+//         pyramid[row][col] += Math.max(
+//           pyramid[row + 1][col],
+//           pyramid[row + 1][col + 1]
+//         );
+//       }
+//     }
+//   }
+//   function printResult() {
+//     console.log(pyramid[0][0]);
+//   }
+//   updatePyramid();
+//   printResult();
+// }
+// largestSlideDown(pyramid);
+
+//Solution 5:
 // function longestSlideDown (pyramid) {
 //   return pyramid.reduceRight((last,current)=>current.map(
 //     (v,i)=>v+Math.max(last[i],last[i+1])
 //   ))[0];
 // }
 
-//Solution 5:
+//Solution 6:
 // const longestSlideDown = pyramid => (
 //   pyramid.reduceRight((lower, current) => (
 //     current.map((v, i) => (lower[i] > lower[i+1]) ? v + lower[i] : v + lower[i+1])
@@ -747,28 +777,56 @@ largestSlideDown(pyramid);
 /*              Q11:Integers: Recreation One              */
 /* ------------------------------------------------------ */
 //Solution 1:
-function listSquaredNumbers(m, n) {
-  function getDiviorsSum(num) {
-    let sum = 0;
-    for (let i = 1; i <= num; i++) {
-      if (num % i === 0) {
-        sum += i ** 2;
-      }
-    }
-    return sum;
-  }
-  function isPerfectSquare(num) {
-    const sqrt = Math.sqrt(num);
-    return sqrt === Math.floor(sqrt);
-  }
-  const result = [];
-  for (let i = m; i <= n; i++) {
-    const divisorsSum = getDiviorsSum(i);
-    if (isPerfectSquare(divisorsSum)) {
-      result.push([i, divisorsSum]);
-    }
-  }
-  return result;
-}
+// function listSquaredNumbers(m, n) {
+//   function getDiviorsSum(num) {
+//     let sum = 0;
+//     for (let i = 1; i <= num; i++) {
+//       if (num % i === 0) {
+//         sum += i ** 2;
+//       }
+//     }
+//     return sum;
+//   }
+//   function isPerfectSquare(num) {
+//     const sqrt = Math.sqrt(num);
+//     return sqrt === Math.floor(sqrt);
+//   }
+//   const result = [];
+//   for (let i = m; i <= n; i++) {
+//     const divisorsSum = getDiviorsSum(i);
+//     if (isPerfectSquare(divisorsSum)) {
+//       result.push([i, divisorsSum]);
+//     }
+//   }
+//   return result;
+// }
+// console.log(listSquaredNumbers(42, 250));
 
-console.log(listSquaredNumbers(42, 250));
+//Solution 2:
+// const listSquared = (m, n) => {
+//   const res = [];
+//   for (let i = m; i <= n; i++) {
+//     let sum = 0;
+//     for (let j = 1; j <= n; j++) {
+//       if (!(i % j)) sum += j ** 2;
+//     }
+//     if (Number.isInteger(sum ** .5)) res.push([i, sum]);
+//   }
+//   return res;
+// };
+
+//Solution 3:
+// function listSquared(m,n){
+// 	let chamber = {};
+// 	function wuTang(x){
+// 		let i = 1, odb = [], meth;
+// 		while (i <= x){!(x % i) ? (odb.push(i),i++) : i++}
+// 		meth = odb.reduce((a,e) => (chamber[e] ? chamber[e] : (chamber[e] = e * e, chamber[e])) + a,0);
+// 		return !(Math.sqrt(meth) % 1) ? [--i,meth] : null;
+// 	}
+// 	return Array.from({length:(n - m)},(e,i) => wuTang(i + m)).filter(e => e);
+// }
+
+/* ------------------------------------------------------ */
+/*                   Q12:Strip Comments                   */
+/* ------------------------------------------------------ */
