@@ -662,7 +662,7 @@ const [plus, minus, times, dividedBy] = [`+`, `-`, `*`, `/`].map(
 // console.log(recoverSecret(triplets)); // Output: "whatisup"
 
 /* ------------------------------------------------------ */
-/*                   Pyramid Slide Down                   */
+/*                  Q10:Pyramid Slide Down                   */
 /* ------------------------------------------------------ */
 //Solution 1:
 // function longestSlideDown(pyramid) {
@@ -742,3 +742,33 @@ largestSlideDown(pyramid);
 //     current.map((v, i) => (lower[i] > lower[i+1]) ? v + lower[i] : v + lower[i+1])
 //   ))[0]
 // );
+
+/* ------------------------------------------------------ */
+/*              Q11:Integers: Recreation One              */
+/* ------------------------------------------------------ */
+//Solution 1:
+function listSquaredNumbers(m, n) {
+  function getDiviorsSum(num) {
+    let sum = 0;
+    for (let i = 1; i <= num; i++) {
+      if (num % i === 0) {
+        sum += i ** 2;
+      }
+    }
+    return sum;
+  }
+  function isPerfectSquare(num) {
+    const sqrt = Math.sqrt(num);
+    return sqrt === Math.floor(sqrt);
+  }
+  const result = [];
+  for (let i = m; i <= n; i++) {
+    const divisorsSum = getDiviorsSum(i);
+    if (isPerfectSquare(divisorsSum)) {
+      result.push([i, divisorsSum]);
+    }
+  }
+  return result;
+}
+
+console.log(listSquaredNumbers(42, 250));
