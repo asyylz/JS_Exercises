@@ -687,10 +687,10 @@ const [plus, minus, times, dividedBy] = [`+`, `-`, `*`, `/`].map(
 //       console.log(arr[0][0]);
 //       return;
 //   }
-  
+
 //   const lastRow = arr.pop();
 //   arr[arr.length-1] = sum(arr[arr.length-1], lastRow);
-  
+
 //   return gett(arr);
 // }
 
@@ -700,10 +700,10 @@ const [plus, minus, times, dividedBy] = [`+`, `-`, `*`, `/`].map(
 //       console.log(arr[0][0]);
 //       return;
 //   }
-  
+
 //   const lastRow = arr.pop();
 //   arr[arr.length-1] = sum(arr[arr.length-1], lastRow);
-  
+
 //   return gett(arr);
 // }
 
@@ -830,3 +830,165 @@ const [plus, minus, times, dividedBy] = [`+`, `-`, `*`, `/`].map(
 /* ------------------------------------------------------ */
 /*                   Q12:Strip Comments                   */
 /* ------------------------------------------------------ */
+
+//Solution 1:
+// function solution(text, markers) {
+//   let currentText = [...text];
+//   for (let i = 0; i < markers.length; i++) {
+//     currentText = currentText.filter(
+//       (char) => char !== markers[i] && char !== markers[i + 1]
+//     );
+//     console.log(currentText.join(""));
+//   }
+//   return currentText;
+// }
+// solution("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"]);
+
+//Solution 2:
+// function solution(text, markers) {
+//   const textArray = [...text];
+//   const result = textArray
+//                     .filter((char) => !markers.includes(char))
+//                     .join('').trim();
+//   console.log(result);
+// }
+// const result = solution("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"]);
+
+//Solution 3:
+// function solution(text, markers) {
+//   let currentText = text;
+
+//   for (let i = 0; i < markers.length; i++) {
+//     const marker = markers[i];
+//     currentText = currentText
+//       .split('\n')
+//       .map(line => {
+//         const markerIndex = line.indexOf(marker);
+//         return markerIndex !== -1 ? line.substring(0, markerIndex).trim() : line;
+//       })
+//       .filter(line => line.trim() !== '')
+//       .join('\n');
+
+//     console.log(currentText);
+//   }
+
+//   return currentText;
+// }
+// const result = solution("aa bb cc", []);
+// console.log("Final Result:", result);
+
+/* ------------------------------------------------------ */
+/*                      Q13:Snail                         */
+/* ------------------------------------------------------ */
+//Solution 1:
+// function snail(arrays) {
+//   /* ----------------------- step 1 ----------------------- */
+//   const resultArray = [];
+//   resultArray.push(...arrays[0]);
+
+//   /* ----------------------- step 2 ----------------------- */
+
+//   const n = arrays.length;
+//   arrays.forEach((element, index) => {
+//     if (index > 0 && index < n - 1) {
+//       resultArray.push(element[n - 1]);
+//     }
+//   });
+
+//   /* ----------------------- step 3 ----------------------- */
+//   resultArray.push(...arrays[n - 1].reverse());
+
+//   /* ----------------------- step 4 ----------------------- */
+
+//   for (let i = n - 2; i > 0; i--) {
+//     if (i === 0) {
+//       break;
+//     } else {
+//       resultArray.push(arrays[i][0]);
+//     }
+//   }
+//   /* ----------------------- stap 5 ----------------------- */
+//   if (n < 4) {
+//     resultArray.push(arrays[n - 2][n - 2]);
+//     return resultArray;
+//   } else {
+//     const backToBeginArray = [];
+//     arrays.forEach((element, index) => {
+//       if (index > 0 && index < n - 1) {
+//         backToBeginArray.push(element.slice(1, 4));
+//       }
+//     });
+//     const ultimateResult = resultArray.concat(snail(backToBeginArray));
+//     return console.log(ultimateResult);
+//   }
+// }
+
+//Solution 2:
+// function snail(array) {
+//   const result = [];
+
+//   while (array.length > 0) {
+//     // Traverse top row from left to right
+//     result.push(...array.shift());
+//     //console.log(result)
+
+//     // Traverse right column from top to bottom
+
+//     for (let i = 0; i < array.length; i++) {
+//       result.push(array[i].pop());
+//     }
+
+//     // Traverse bottom row from right to left
+//     if (array.length > 0) {
+//       result.push(...array.pop().reverse());
+
+//     }
+
+//     // Traverse left column from bottom to top
+//     for (let i = array.length - 1; i >= 0; i--) {
+//       result.push(array[i].shift());
+//     }
+
+//   }
+
+//   return result;
+// }
+
+//Solution 3:
+
+//Test Data:
+const array1 = [
+  [
+    [1, 2, 3, 4, 5, 6, 7],
+    [20, 21, 22, 23, 24, , 10, 7],
+    [11, 19, 32, 33, 34, 25, 8],
+    [12, 18, 31, 36, 35, 26, 9],
+    [13, 17, 30, 29, 28, 27, 10],
+    [14, 16, 15, 14, 13, 12, 11],
+  ],
+];
+const array0 = [
+  [1, 2, 3, 4, 5],
+  [6, 7, 8, 9, 10],
+  [11, 12, 13, 14, 15],
+  [16, 17, 18, 19, 20],
+  [21, 22, 23, 24, 25],
+];
+function snail(array) { /****/
+  var vector = [];
+  while (array.length) {
+    vector.push(...array.shift());
+    array.map(row => vector.push(row.pop()));
+    array.reverse().map(row => row.reverse());
+    console.log(array)
+  }
+  console.log(vector)
+  return vector;
+}
+console.log(snail(array0));
+console.log(snail(array1));
+
+
+
+
+
