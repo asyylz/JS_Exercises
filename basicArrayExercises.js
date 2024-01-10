@@ -3,19 +3,20 @@
 //1. Write a JavaScript function to check whether an `input` is an array or not.
 //Solution 1:
 var is_array = function (input) {
-  if (toString.call(input) === "[object Array]") return true;
+  if (toString.call(input) === '[object Array]') return true;
   return false;
 };
-console.log(is_array("w3resource"));
+console.log(is_array('w3resource'));
 console.log(is_array([1, 2, 4, 0]));
 //Solution 2:
 const array1 = [1, 2, 3];
-const array2 = "Not an array";
+const array2 = 'Not an array';
 
 console.log(Array.isArray(array1)); // true
 console.log(Array.isArray(array2)); // false
 
 /* ------------------------- 2. ------------------------- */
+//2. Write a JavaScript function to clone an array.
 //Solution 1:
 //2. Write a JavaScript function to clone an array.
 function array_Clone(array) {
@@ -23,13 +24,13 @@ function array_Clone(array) {
 }
 
 //Solution 2:
-var array_Clone = (array1) => array1.slice(0); //ES6
+var array_Clone = array1 => array1.slice(0); //ES6
 
 console.log(array_Clone([1, 2, 4, 0]));
 console.log(array_Clone([1, 2, [4, 0]]));
 
 /* -------------------------- 3 ------------------------- */
-// Write a JavaScript function to get the first element of an array. Passing the parameter 'n' will return the first 'n' elements of the array.
+//3.Write a JavaScript function to get the first element of an array. Passing the parameter 'n' will return the first 'n' elements of the array.
 //Solution 1:
 function first(arr, n) {
   if (!n) {
@@ -55,6 +56,7 @@ console.log(first([7, 9, 0, -2], 6));
 console.log(first([7, 9, 0, -2], -3));
 
 /* -------------------------- 4 ------------------------- */
+//4. Write a JavaScript function to get the last element of an array. Passing the parameter 'n' will return the last 'n' elements of the array.
 //Solution 1:
 var last = function (array, n) {
   if (array == null) return void 0;
