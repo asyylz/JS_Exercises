@@ -18,7 +18,6 @@ console.log(Array.isArray(array2)); // false
 /* ------------------------- 2. ------------------------- */
 //2. Write a JavaScript function to clone an array.
 //Solution 1:
-//2. Write a JavaScript function to clone an array.
 function array_Clone(array) {
   return array.slice(0);
 }
