@@ -98,6 +98,24 @@
         "wholeMatch": false
       },
       "color": "darkorange"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "----------------- */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darksalmon"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* ------------------",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkseagreen"
     }
   ]
 }
