@@ -97,7 +97,7 @@ function onlyEvenNumbers(number) {
   }
   console.log(output);
 }
-onlyEvenNumbers(025468);
+//onlyEvenNumbers(025468);
 onlyEvenNumbers(657393037567);
 onlyEvenNumbers(73834040585387);
 
@@ -115,4 +115,146 @@ for (var x = 1; x < str.length; x++) {
 }
 console.log(result.join(''));
 
+/* -------------------------- 7 ------------------------- */
+//7.Write a JavaScript program to sort the items of an array.
+//Solution 1:
+var values = [-3, 8, 7, 6, 5, -4, 3, 2, 1];
+const sortedValues = values.toSorted((a, b) => a - b);
+console.log(sortedValues);
+//Solution 2:
+// arr1: An input array containing numerical values.
+// arr2: An empty array that will be used to store the sorted values.
+// min: A variable initialized with the first element of arr1.
+// pos: A variable to keep track of the position of the minimum element in the array.
+// max: A variable initialized with the first element of arr1.
+// Find Maximum Element:
+// A loop to iterate through arr1 and find the maximum element (max) in the array.
+// Sorting using Selection Sort:
+// The outer loop iterates through each element of arr1.
+// The inner loop finds the minimum element (min) and its position (pos) in the remaining unsorted portion of the array.
+// The minimum element is then added to arr2, and the corresponding element in arr1 is marked as 'x' to indicate it has been processed.
+// min is reset to max for the next iteration.
+const arr1 = [-3, 8, 7, 6, 5, -4, 3, 2, 1];
+const arr2 = [];
+let min = arr1[0];
+let pos;
+var max = arr1[0];
+for (i = 0; i < arr1.length; i++) {
+  if (max < arr1[i]) max = arr1[i];
+}
+
+for (var i = 0; i < arr1.length; i++) {
+  for (let j = 0; j < arr1.length; j++) {
+    if (arr1[j] !== 'x') {
+      if (min > arr1[j]) {
+        min = arr1[j];
+        pos = j;
+      }
+    }
+  }
+  arr2[i] = min;
+  arr1[pos] = 'x';
+  min = max;
+}
+console.log(arr2);
+
+/* -------------------------- 8 ------------------------- */
+8. Write a JavaScript program to find the most frequent item in an array.
+//Solution 1:
+var arr1 = [3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3];
+function maxRepeat(arr) {
+  const list = arr.reduce((acc, currentValue) => {
+    acc[currentValue] = (acc[currentValue] || 0) + 1;
+    return acc;
+  }, {});
+  console.log(list);
+  //This return value itself
+  //   const maxElement = Object.entries(list)
+  //     .sort((a, b) => b[1] - a[1])
+  //     .slice(0, 1)
+  //     .map(([key]) => key );
+  //   return maxElement;
+  const maxCount = Math.max(...Object.values(list));
+  console.log(maxCount);
+}
+maxRepeat(arr1);
+
+//Solution 2:
+var arr1 = [3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3];
+var mf = 1; //mf represents the maximum frequency, initialized to 1
+var m = 0; // m represents the current frequency, initialized to 0
+var item; // item represents the most frequently occurring element
+for (var i = 0; i < arr1.length; i++) {
+  for (var j = i; j < arr1.length; j++) {
+    if (arr1[i] == arr1[j]) m++;
+    if (mf < m) {
+      mf = m;
+      item = arr1[i];
+    }
+  }
+  m = 0; // Reset the current frequency for the next element in the outer loop
+}
+console.log(`${item} ( ${mf} times ) `) ;
+
+/* -------------------------- 9 ------------------------- */
+//9. Write a JavaScript program that accepts a string as input and swaps the case of each character. For example if you input 'The Quick Brown Fox' the output should be 'tHE qUICK bROWN fOX'.
+//Solution 1:
+const str = 'The Quick Brown Fox';
+console.log(
+  str
+    .toUpperCase()
+    .split(' ')
+    .map(word => word[0].toLowerCase() + word.slice(1))
+    .join(' ')
+);
+
+//Solution 2:
+var str = 'c';
+const UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const LOWER = 'abcdefghijklmnopqrstuvwxyz';
+const result = [];
+
+  for(let x=0; x<str.length; x++)
+  {
+    if(UPPER.includes(str[x]))
+    {
+      result.push(str[x].toLowerCase());
+    }
+    else if(LOWER.includes(str[x]))
+    {
+      result.push(str[x].toUpperCase());
+    }
+    else
+    {
+      result.push(str[x]);
+    }
+  }
+console.log(result.join(''));
+
+/* -------------------------- 10 ------------------------- */
+//10. Write a JavaScript program that prints the elements of the following array. Note : Use nested for loops.
+//Solution 1:
+const array = [
+  [1, 2, 1, 24],
+  [8, 11, 9, 4],
+  [7, 0, 7, 27],
+  [7, 4, 28, 14],
+  [3, 10, 26, 7],
+];
+for (let i = 0; i < array.length; i++) {
+  for (let j = 0; j < array[i].length; j++) {
+    console.log(`row ${i+1}\n${array[i][j]}`)
+  }
+}
+//Solution 2:
+const a = [[1, 2, 1, 24], [8, 11, 9, 4], [7, 0, 7, 27], [7, 4, 28, 14], [3, 10, 26, 7]];
+ 
+for (const i in a) 
+{
+   console.log(`row ${i}`);
+   for (const j in a[i]) 
+     {
+      console.log(` ${a[i][j]}`);
+     }
+}
 
