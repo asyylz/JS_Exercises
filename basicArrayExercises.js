@@ -248,13 +248,109 @@ for (let i = 0; i < array.length; i++) {
 }
 //Solution 2:
 const a = [[1, 2, 1, 24], [8, 11, 9, 4], [7, 0, 7, 27], [7, 4, 28, 14], [3, 10, 26, 7]];
- 
-for (const i in a) 
+
+for (const i in a)
 {
    console.log(`row ${i}`);
-   for (const j in a[i]) 
+   for (const j in a[i])
      {
       console.log(` ${a[i][j]}`);
      }
 }
+
+/* -------------------------- 11 ------------------------- */
+//Write a JavaScript program to find the sum of squares of a numerical vector.
+//Solution 1:
+function sumSquares(arr) {
+  return arr
+    .map(num => num ** 2)
+    .reduce((acc, currentValue) => {
+      return acc + currentValue;
+    }, 0);
+}
+console.log(sumSquares([1, 2, 1, 24]));
+
+//Solution 2:
+function sum_sq(array) {
+    var sum = 0,
+        i = array.length;
+    while (i--) {
+      sum += Math.pow(array[i], 2);
+    }return sum;
+  }
+
+  console.log(sum_sq([0, 1, 2, 3, 4]));
+
+/* -------------------------- 12 ------------------------- */
+//12. Write a JavaScript program to compute the sum and product of an array of integers.
+//Solution 1:
+function sum_product(arr) {
+  let sum = arr.reduce((acc, currentValue) => {
+    return acc + currentValue;
+  }, 0);
+
+  let product = arr.reduce((acc, currentValue) => {
+    return acc * currentValue;
+  }, 1);
+
+  return { sum, product };
+}
+
+console.log(sum_product([1, 2, 3, 4]));
+
+//Solution 2:
+function sum_product(array) {
+  var sum = 0;
+  var product = 1;
+  let i = array.length;
+  while (i--) {
+    sum += array[i];
+    product *= array[i];
+  }
+  return { sum, product };
+}
+console.log(sum_product([1, 2, 3, 4]));
+
+/* -------------------------- 13 ------------------------- */
+//13. Write a JavaScript program to add items to a blank array and display them.
+//Solution 1:
+let x = 0;
+const array = Array();
+
+function add_element_to_array() {
+  array[x] = document.getElementById('text1').value;
+  alert(`Element: ${array[x]} Added at index ${x}`);
+  x++;
+  document.getElementById('text1').value = '';
+}
+
+function display_array() {
+  let e = '<hr/>';
+
+  for (let y = 0; y < array.length; y++) {
+    e += `Element ${y} = ${array[y]}<br/>`;
+  }
+  document.getElementById('Result').innerHTML = e;
+}
+
+/* -------------------------- 14 ------------------------- */
+//14. Write a JavaScript program to remove duplicate items from an array (ignore case sensitivity).
+//Solution 1:
+const color = [
+  'Blue ',
+  'Green',
+  'Green',
+  'Red',
+  'Orange',
+  'Orange',
+  'Violet',
+  'Indigo',
+  'Yellow ',
+  'Indigo',
+];
+function removeDublicates(arr) {
+  const sortedArray = new Set(arr);
+  console.log(sortedArray);
+}
+removeDublicates(color);
 
