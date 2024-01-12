@@ -354,3 +354,219 @@ function removeDublicates(arr) {
 }
 removeDublicates(color);
 
+//Solution 2:
+function removeDublicates(arr) {
+  var x,
+    len = arr.length,
+    out = [],
+    obj = [];
+
+  for (x = 0; x < len; x++) {
+    obj[arr[x]] = 0;
+    console.log(obj)
+  }
+  for (x in obj) {
+    out.push(x)
+    console.log(out)
+  }
+  return out
+}
+console.log(removeDublicates([1, 2, 2, 4, 5, 4, 7, 8, 7, 3, 6]));
+
+/* -------------------------- 15 ------------------------- */
+//15.Write a JavaScript program to display the colors in the following way :
+// "1st choice is Blue ."
+// "2nd choice is Green."
+// "3rd choice is Red."
+//Solution 1:
+const arr = [
+  'Blue',
+  'Green',
+  'Red',
+  'Orange',
+  'Violet',
+  'Indigo',
+  'Yellow',
+  'Blue ',
+  'Green',
+  'Red',
+  'Orange',
+  'Violet',
+  'Indigo',
+  'Yellow',
+  'Blue',
+  'Green',
+  'Red',
+  'Orange',
+  'Violet',
+  'Indigo',
+  'Yellow',
+  'Blue ',
+  'Green',
+  'Red',
+  'Orange',
+  'Violet',
+  'Indigo',
+  'Yellow',
+];
+function orderColors(arr) {
+  console.log(
+    arr.map(
+      (element, i) =>
+        `${i + 1}${
+          (i + 1)%10 == 1  && (i + 1) !== 11 ? 'st' : (i + 1)%10 == 2 && (i + 1) !== 12 ? 'nd' : (i + 1)%10 == 3 && (i + 1)!== 13 ? 'rd' : 'th'
+        } choice is ${element}`
+    )
+  );
+}
+console.log(orderColors(arr));
+
+//Solution 2:
+function orderColors(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    console.log(
+      `${i + 1}${
+        (i + 1) % 10 == 1 && i + 1 !== 11
+          ? 'st'
+          : (i + 1) % 10 == 2 && i + 1 !== 12
+          ? 'nd'
+          : (i + 1) % 10 == 3 && i + 1 !== 13
+          ? 'rd'
+          : 'th'
+      } choice is ${arr[i]}`
+    );
+  }
+}
+orderColors(arr);
+//Solution 3:
+const color = [
+  'Blue ',
+  'Green',
+  'Red',
+  'Orange',
+  'Violet',
+  'Indigo',
+  'Yellow '
+];
+
+function Ordinal(n) {
+  const o = ['th', 'st', 'nd', 'rd'];
+  const x = n % 100;
+  return x + (o[(x - 20) % 10] || o[x] || o[0]);
+}
+
+for (let n = 0; n < color.length; n++) {
+  const ordinal = n + 1;
+
+  const output = `${Ordinal(ordinal)} choice is ${color[n]}.`;
+
+  console.log(output);
+}
+
+/* -------------------------- 16 ------------------------- */
+//16. Write a JavaScript program to find the leap years in a given range of years.
+//Solution 1:
+const year = +prompt('Enter a year: ');
+function leapYear(year) {
+  if (year % 400 === 0 || (year % 4 === 0 && year % 100 !== 0)) {
+    console.log(year, 'is a leap year');
+  } else {
+    console.log(year, 'is not a leap year');
+  }
+}
+leapYear(year)
+
+//Solution 2:
+function leap_year_range(st_year, end_year) {
+  var year_range = [];
+  for (var i = st_year; i <= end_year; i++)
+  {
+       year_range.push(i);
+  }
+  var new_array = [];
+
+year_range.forEach(
+function(year)
+{
+ if (test_LeapYear(year))
+ new_array.push(year);
+});
+
+return new_array;
+}
+
+function test_LeapYear(year) {
+if ((year % 4 === 0 && year % 100 !== 0) || (year % 100 === 0 && year % 400 === 0)) {
+          return year;
+  } else {
+          return false;
+  }
+}
+
+console.log(leap_year_range(2000,2012));
+
+/* -------------------------- 17 ------------------------- */
+//17. Write a JavaScript program to shuffle an array.
+//Solution 1:
+const arr = [2, 1, 3, 4, 7, 7, 6, 7];
+
+function shuffle(arr) {
+  return arr.map((element, i) => ({ value: element, sort: Math.floor(Math.random() * arr.length) }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(obj => obj.value);
+}
+
+console.log(shuffle(arr));
+
+//Solution 2:
+function shuffle(arr) {
+  let len = arr.length;
+  let temp;
+  let index;
+  while (len > 0) {
+    index = Math.floor(Math.random() * len);
+    len--;
+    temp = arr[len]
+    arr[len] = arr[index]
+    arr[index] =temp
+  }
+}
+/* -------------------------- 18 ------------------------- */
+//18. Write a JavaScript program to perform a binary search.
+//Note : A binary search or half-interval search algorithm finds the position of a specified input value within an array sorted by key value.
+//Solution 1:
+const items = [1, 2, 3, 4, 5, 7, 8, 9];
+function findIndex(array, num) {
+  //return array.indexOf(num) //Option 1
+  return array
+    .map((element, index) =>(element === num ? index : -1))
+    .filter(index => index !== -1); //Option 2
+}
+console.log(findIndex(items, 5));
+
+//Solution 2:
+function binary_Search(items, value){
+  let firstIndex  = 0;
+  let lastIndex   = items.length - 1;
+  let middleIndex = Math.floor((lastIndex + firstIndex)/2);
+
+  while(items[middleIndex] != value && firstIndex < lastIndex)
+  {
+     if (value < items[middleIndex])
+      {
+          lastIndex = middleIndex - 1;
+      } 
+    else if (value > items[middleIndex])
+      {
+          firstIndex = middleIndex + 1;
+      }
+      middleIndex = Math.floor((lastIndex + firstIndex)/2);
+  }
+
+  return (items[middleIndex] != value) ? -1 : middleIndex;
+}
+console.log(binary_Search(items, 1));   
+console.log(binary_Search(items, 5));
+
+
+
