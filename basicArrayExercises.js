@@ -661,7 +661,7 @@ function duplicatedItems(arr) {
   const result = [];
 
   arr.forEach(item => {
-    if (!object[item]) 
+    if (!object[item])
     object[item] = 0;
     object[item] += 1;
   });
@@ -674,3 +674,185 @@ function duplicatedItems(arr) {
 }
 
 console.log(duplicatedItems(array));
+
+/* -------------------------- 21 ------------------------- */
+//21. Write a JavaScript program to flatten a nested (any depth) array. If you pass shallow, the array will only be flattened to a single level.
+//Solution 1:
+function flatten(a, shallow, r) {
+  ////If r is not provided, it is initialized as an empty array.
+  if (!r) {
+    r = [];
+  }
+  if (shallow) {
+    return r.concat(...a);
+  }
+  for (let i = 0; i < a.length; i++) {
+    if (a[i].constructer == Array) {
+      flatten(a[i], shallow, r);
+    } else {
+      r.push(a[i]);
+    }
+  }
+  return r;
+}
+
+console.log(flatten([1, [2], [3, [[4]]], [5, 6]],true,[45]));
+console.log(flatten([1, [2], [3, [[4]]], [5, 6]],false));
+
+//Solution 2:
+function flatten(arr,deep) {
+  let result = arr.flat(deep)
+  return result
+}
+console.log(flatten([1, [2], [3, [[4]]], [5, 6]],true));
+console.log(flatten([1, [2], [3, [[[4]]]], [5, 6]],4));
+
+//Solution 3:
+function flatten() {
+  if (!arguments[1]) {
+    return arguments[0].flat(Infinity);
+  }
+
+  return arguments[0].flat();
+}
+
+console.log(flatten([1, [2], [3, [[4]]], [5, 6]]));
+console.log(flatten([1, [2], [3, [[4]]], [5, 6]],true));
+
+//Solution 4:
+function flattenObject(obj, parentKey = '') {
+  let flattened = {};
+
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const propName = parentKey ? `${parentKey}.${key}` : key;
+
+      if (
+        typeof obj[key] === 'object' &&
+        obj[key] !== null &&
+        !Array.isArray(obj[key])
+      ) {
+        Object.assign(flattened, flattenObject(obj[key], propName));
+      } else {
+        flattened[propName] = obj[key];
+      }
+    }
+  }
+
+  return flattened;
+}
+console.log(flatten([1, [2], [3, [[4]]], [5, 6]]));
+console.log(flatten([1, [2], [3, [[4]]], [5, 6]], false));
+/* -------------------------- 22 ------------------------- */
+//22. Write a JavaScript program to compute the union of two arrays.
+//Solution 1:
+function union(arr1, arr2) {
+  /* ----------------------- step 1 ----------------------- */
+  for (const element of arr1) {
+    arr2.push(element);
+  }
+  ////alternative for this step
+  ////const concatedArray = arr1.concat(arr2);
+  /* ----------------------- step 2 ----------------------- */
+  const concatedArray = arr2.reduce((acc, currentValue) => {
+    acc[currentValue] = (acc[currentValue] || 0) + 1;
+    return acc;
+  }, {});
+
+  console.log(Object.keys(concatedArray).map(Number));
+}
+union([1, 2, 3], [100, 2, 1, 10]);
+
+//Solution 2:
+function union(arr1, arr2) {
+  if (arr1 === null || arr2 === null) return void 0;
+
+  const obj = {};
+  for (let i = arr1.length - 1; i >= 0; i--) {
+    obj[arr1[i]] = arr1[i];
+    console.log(obj);
+  }
+  for (var i = arr2.length - 1; i >= 0; --i) {
+    obj[arr2[i]] = arr2[i];
+  }
+
+  const res = [];
+  for (const n in obj) {
+    if (obj.hasOwnProperty(n)) res.push(obj[n]);
+  }
+  return res;
+}
+console.log(union([1, 2, 3], [100, 2, 1, 10]));
+
+//Solution 3:
+function union() {
+  return [...new Set(arguments[0].concat(arguments[1]))].sort((a, b) => a - b);
+}
+console.log(union([1, 2, 3], [100, 2, 1, 10]))
+
+//Solution 4:
+function union(arr1, arr2) {
+  const concatedArray = arr1.concat(arr2.filter(element => arr1.indexOf(element) === -1));
+  console.log(concatedArray);
+}
+union([1, 2, 3], [100, 2, 1, 10]);
+
+//Solution 5:
+function union(arr1, arr2) {
+  const concatedArray = arr2.reduce((acc, currentValue) => {
+    if (!acc.hasOwnProperty(currentValue)) {
+      acc[currentValue] = true;
+    }
+    return acc;
+  }, {});
+
+  console.log(Object.keys(concatedArray).map(Number));
+}
+
+union([1, 2, 3], [100, 2, 1, 10]);
+
+/* -------------------------- 23 ------------------------- */
+//23. Write a JavaScript function to find the difference between two arrays.
+//Solution 1:
+function difference(arr1, arr2) {
+  arr1 = arr1.flat(Infinity);
+  arr2 = arr2.flat(Infinity);
+  console.log(
+    arr2
+      .filter(element => arr1.indexOf(element) === -1)
+      .concat(arr1.filter(element => arr2.indexOf(element) === -1))
+  );
+}
+difference([1, 2, 3], [100, 2, 1, 10]);
+difference([1, 2, 3, 4, 5], [1, [2], [3, [[4]]], [5, 6]]);
+
+//Solution 2:
+
+const difference = (arr1, arr2) => {
+  const temp = [];
+  arr1 = arr1.toString().split(',').map(Number);
+  arr2 = arr2.toString().split(',').map(Number);
+
+  for (var i in arr1) {
+    if (!arr2.includes(arr1[i])) temp.push(arr1[i]);
+  }
+  for (var i in arr2) {
+    if (!arr1.includes(arr2[i])) temp.push(arr2[i]);
+  }
+  return temp.sort((a, b) => a - b);
+};
+console.log(difference([1, 2, 3], [100, 2, 1, 10]));
+console.log(difference([1, 2, 3, 4, 5], [1, [2], [3, [[4]]],[5,6]]));
+
+//Solution 3:
+let difference = (arr1, arr2) => {
+  let diff = [];
+  arr1 = arr1.flat(Infinity);
+  arr2 = arr2.flat(Infinity);
+  arr1.forEach(element => (arr2.includes(element) ? null : diff.push(element)));
+  arr2.forEach(element => (arr1.includes(element) ? null : diff.push(element)));
+  return diff;
+};
+console.log(difference([1, 2, 3], [100, 2, 1, 10]));
+console.log(difference([1, 2, 3, 4, 5], [1, [2], [3, [[4]]], [5, 6]]));
+
