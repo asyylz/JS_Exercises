@@ -365,7 +365,7 @@ function removeDublicates(arr) {
     obj[arr[x]] = 0;
     console.log(obj)
   }
-  for (x in obj) {
+  for (x in obj) { //// out = Object.keys(obj);
     out.push(x)
     console.log(out)
   }
@@ -555,7 +555,7 @@ function binary_Search(items, value){
      if (value < items[middleIndex])
       {
           lastIndex = middleIndex - 1;
-      } 
+      }
     else if (value > items[middleIndex])
       {
           firstIndex = middleIndex + 1;
@@ -565,8 +565,112 @@ function binary_Search(items, value){
 
   return (items[middleIndex] != value) ? -1 : middleIndex;
 }
-console.log(binary_Search(items, 1));   
+console.log(binary_Search(items, 1));
 console.log(binary_Search(items, 5));
 
+/* -------------------------- 19 ------------------------- */
+//19. There are two arrays with individual values. Write a JavaScript program to compute the sum of each individual index value in the given array.
+//Solution 1:
+const array1 = [1, 0, 2, 3, 4, 7, 10];
+const array2 = [3, 5, 6, 7, 8, 13];
+function sumOfArrays(arr1, arr2) {
+  let sumArray = [];
+  for (let i = 0; i < Math.max(arr1.length, arr2.length); i++) {
+    if (arr1[i] === undefined) {
+      arr1[i] = 0;
+      sumArray.push(arr1[i] + arr2[i]);
+    } else if (arr2[i] === undefined) {
+      arr2[i] = 0;
+      sumArray.push(arr1[i] + arr2[i]);
+    } else {
+      sumArray.push(arr1[i] + arr2[i]);
+    }
+  }
+  return sumArray;
+}
+console.log(sumOfArrays(array1, array2));
 
+//Solution 2:
+function sumOfArrays(arr1, arr2) {
+  const result = array1.map(
+    (element1, index) =>
+      (element1 === undefined ? 0 : element1) +
+      (array2[index] === undefined ? 0 : array2[index])
+  );
+  console.log(result);
+}
+console.log(sumOfArrays(array1, array2));
 
+//Solution 3:
+function sumOfArrays(arr1, arr2) {
+  const result = [];
+  let ctr = 0;
+  let x = 0;
+  if (arr1.length === 0) return 'Array1 is empty';
+  if (arr2.length === 0) return 'Array2 is empty';
+
+  while (ctr < arr1.length && ctr < arr2.length) {
+    result.push(arr1[ctr] + arr2[ctr]);
+    ctr++;
+  }
+  if(ctr === arr1.length) {
+    for(x=ctr; x<arr2.length; x++) {
+      result.push(arr2[x])
+    }
+  }else {
+    for(x=ctr; x<arr1.length; x++) {
+      result.push(arr1[x])
+    }
+  }
+  return result
+}
+console.log(sumOfArrays(array1,array2))
+
+/* -------------------------- 20 ------------------------- */
+//20. Write a JavaScript program to find duplicate values in a JavaScript array.
+//Solution 1:
+const array = [
+  'Blue',
+  'Green',
+  'Red',
+  'Orange',
+  'Violet',
+  'Indigo',
+  'Yellow',
+  'Blue',
+  'Green',
+  'Red',
+  'Orange',
+];
+function duplicatedItems(arr) {
+const duplicatedArray = arr.reduce((acc, currentValue) => {
+  acc[currentValue] = (acc[currentValue] || 0) + 1;
+  return acc;
+}, {});
+  console.log(duplicatedArray);
+  console.log(typeof duplicatedArray);
+  return Object.entries(duplicatedArray)
+    .filter(([key, value]) => value > 1)
+    .map(([key, value]) => key);
+}
+console.log(duplicatedItems(array));
+
+//Solution 2:
+function duplicatedItems(arr) {
+  const object = {};
+  const result = [];
+
+  arr.forEach(item => {
+    if (!object[item]) 
+    object[item] = 0;
+    object[item] += 1;
+  });
+  for(const prop in object) {
+    if (object[prop] >= 2) {
+      result.push(prop)
+    }
+  }
+  return result
+}
+
+console.log(duplicatedItems(array));
