@@ -1060,5 +1060,295 @@ function num_string_range(x, y, n) {
 
 num_string_range('A', 'Z', 2);
 
+//Solution 3:
+
+function num_string_range(start, end, step) {
+  const range = [];
+  if (
+    step === 0 ||
+    typeof start == 'undefined' ||
+    typeof end == 'undefined' ||
+    typeof start != typeof end
+  )
+    return false;
+
+  if (end < start) {
+    step = -step;
+  }
+
+  if (typeof start == 'number') {
+    while (step > 0 ? end >= start : end <= start) {
+      range.push(start);
+      start += step;
+    }
+  } else if (typeof start == 'string') {
+    if (start.length != 1 || end.length != 1) {
+      throw TypeError('Strings with one character are supported.');
+    }
+
+    start = start.charCodeAt(0);
+    end = end.charCodeAt(0);
+
+    while (step > 0 ? end >= start : end <= start) {
+      range.push(String.fromCharCode(start));
+      start += step;
+    }
+  } else {
+    throw TypeError('Only string and number are supported');
+  }
+
+  return range;
+}
+
+console.log(num_string_range('a', 'z', 2));
+console.log(num_string_range('Z', 'A', 2));
+console.log(num_string_range(0, -5, 1));
+console.log(num_string_range(0, 25, 5));
+console.log(num_string_range(20, 5, 5));
+
+/* -------------------------- 30 ------------------------- */
+//30. Write a JavaScript function that merges two arrays and removes all duplicate elements.
+//Solution 1:
+let merge_array = (array1, array2) => {
+  let obj = {};
+  let combinedArray = array1.concat(array2);
+  combinedArray.forEach(value => {
+    obj[value] = '';
+  });
+  return Object.keys(obj);
+};
+console.log(merge_array([1, 2, 3], [2, 30, 1]));
+//Solution 2:
+const merge_array = (arr1, arr2) => {
+  let arr = arr1;
+  for (let i = 0; i < arr2.length; i++) {
+    arr.push(arr2[i]);
+  }
+  let x,
+    len = arr.length,
+    out = [],
+    obj = [];
+  for (x = 0; x < len; x++) {
+    obj[arr[x]] = 0;
+    console.log(obj);
+  }
+  for (x in obj) {
+    out.push(x)
+  }
+  return out
+};
+console.log(merg
+function merge_array(array1, array2) {
+  const result_array = [];
+  const arr = array1.concat(array2);
+  let len = arr.length;
+  const assoc = {};
+
+  while (len--) {
+    const item = arr[len];
+
+    if (!assoc[item]) {
+      result_array.unshift(item);
+      console.log(result_array);
+      assoc[item] = true;
+    }
+  }
+  return result_array;
+}
+const array1 = [1, 2, 3];
+const array2 = [2, 30, 1];
+console.log(merge_array(array1, array2));
+
+/* -------------------------- 31 ------------------------- */
+31. Write a JavaScript function to remove a specific element from an array.
+//Solution 1:
+function removeArrayElement(arr, n) {
+  const removeElement = element => element === n;
+  console.log(arr.splice(arr.findIndex(removeElement),1));
+ return arr
+}
+console.log(removeArrayElement([5, 12, 8, 130, 44], 12));
+
+//Solution 2:
+const removeArrayElement = (arr, n) => {
+  console.log(arr.filter(number => number !== n));
+};
+removeArrayElement([5, 12, 8, 130, 44], 12);
+
+//Solution 3:
+function remove_array_element(array, n)
+ {
+   const index = array.indexOf(n);
+   if (index > -1) {
+    array.splice(index, 1);
+}
+   return array;
+ }
+
+console.log(remove_array_element([2, 5, 9, 6], 5));
+
+/* -------------------------- 32 ------------------------- */
+//32. Write a JavaScript function to find an array containing a specific element.
+//Solution 1: //ASK
+const contains = (arr, n) => {
+  arr.forEach(element => {
+    return element === n ? true : false;
+  });
+}
+console.log(contains([2, 5, 9, 6], 5));
+//Solution 2:
+const contains = (arr, n) => {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === n) return true;
+  }
+  return false;
+};
+console.log(contains([2, 5, 9, 6], 5));
+
+//Solution 3:
+function contains(arr,n) {
+    return arr.includes(n)
+}
+console.log(contains([2, 5, 9, 6], 5));
+
+//Solution 4:
+function contains(array, a) {
+  return array.indexOf(a) !== -1;
+}
+
+const arr = [2, 5, 9, 6];
+console.log(contains(arr, 5)); // Output: true
+
+/* -------------------------- 33 ------------------------- */
+//Solution 1:
+//Solution 2:
+//Solution 3:
+
+/* -------------------------- 34 ------------------------- */
+//34. Write a JavaScript function to get the nth largest element from an unsorted array.
+//Solution 1:
+function nthlargest(arr, n) {
+  return arr.sort((a, b) => b - a)[n - 1];
+}
+console.log(nthlargest([43, 56, 23, 89, 88, 90, 99, 652], 4));
+//Solution 2:
+function nthlargest(arra, highest) {
+  let x = 0;
+  let y = 0;
+  let z = 0;
+  let temp = 0;
+  const tnum = arra.length;
+  let flag = false;
+  let result = false;
+
+  while (x < tnum) {
+    y = x + 1;
+
+    if (y < tnum) {
+      for (z = y; z < tnum; z++) {
+        if (arra[x] < arra[z]) {
+          temp = arra[z];
+          arra[z] = arra[x];
+          arra[x] = temp;
+          flag = true;
+        } else {
+          continue;
+        }
+      }
+    }
+
+    if (flag) {
+      flag = false;
+    } else {
+      x++;
+      if (x === highest) {
+        result = true;
+      }
+    }
+    if (result) {
+      break;
+    }
+  }
+
+  return arra[highest - 1];
+}
+
+console.log(nthlargest([43, 56, 23, 89, 88, 90, 99, 652], 4));
+
+/* -------------------------- 35 ------------------------- */
+//35. Write a JavaScript function to get random items from an array.
+//Solution 1:
+function rondomItems(array){
+   return array[Math.floor(Math.random() * array.length)]
+}
+console.log(rondomItems([254, 45, 212, 365, 2543]))
 
 
+const lorem =
+  'Loremipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+
+function wordGenerator(str, n) {
+  let lettersArray = [];
+  let listOfWords = [];
+  let obj = {};
+
+  Array.from(str).forEach(char => {
+    if (
+      (char.charCodeAt(0) >= 65 && char.charCodeAt(0) <= 90) ||
+      (char.charCodeAt(0) >= 97 && char.charCodeAt(0) <= 122)
+    ) {
+      lettersArray.push(char);
+    }
+    return lettersArray;
+  });
+  let word = '';
+  for (let i = 0; i < n; i++) {
+    word += lettersArray[Math.floor(Math.random() * lettersArray.length)];
+  }
+
+  obj[word] = 0;
+  console.log(listOfWords)
+  console.log(word);
+  console.log(obj);
+}
+
+wordGenerator(lorem, 6);
+
+const str = 'asiye';
+function shuffle(word) {
+  let len = word.length;
+  let wordArray = [...word];
+  let possibleWordList = [];
+  let generatedWords = [];
+
+  while (generatedWords.length < factorial(len)) {
+    let newBornWord = '';
+
+    for (let i = len - 1; i > 0; i--) {
+      const index = Math.floor(Math.random() * (i + 1));
+      const temp = wordArray[i];
+      wordArray[i] = wordArray[index];
+      wordArray[index] = temp;
+    }
+
+    for (let i = 0; i < len; i++) {
+      newBornWord += wordArray[i];
+    }
+
+    if (!generatedWords.includes(newBornWord)) {
+      possibleWordList.push(newBornWord);
+      generatedWords.push(newBornWord);
+    }
+  }
+
+  console.log(possibleWordList.join(', '));
+}
+
+function factorial(n) {
+  if (n === 0 || n === 1) {
+    return 1;
+  }
+  return n * factorial(n - 1);
+}
+
+shuffle(str);
