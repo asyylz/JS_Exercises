@@ -748,9 +748,9 @@ console.log(flatten([1, [2], [3, [[4]]], [5, 6]], false));
 //Solution 1:
 function union(arr1, arr2) {
   /* ----------------------- step 1 ----------------------- */
-  for (const element of arr1) {
-    arr2.push(element);
-  }
+for (const element of arr1) {
+  arr2.push(element);
+}
   ////alternative for this step
   ////const concatedArray = arr1.concat(arr2);
   /* ----------------------- step 2 ----------------------- */
@@ -855,4 +855,210 @@ let difference = (arr1, arr2) => {
 };
 console.log(difference([1, 2, 3], [100, 2, 1, 10]));
 console.log(difference([1, 2, 3, 4, 5], [1, [2], [3, [[4]]], [5, 6]]));
+
+/* -------------------------- 24 ------------------------- */
+//24. Write a JavaScript function to remove. 'null', '0', '""', 'false', 'undefined' and 'NaN' values from an array.
+//Solution 1:
+const removeFalsyValues = arr => {
+  let cleanArray = [];
+  arr.forEach(element =>
+    arr.includes(!element) ? cleanArray.push(element) : null
+  );
+  return cleanArray;
+};
+console.log(
+  removeFalsyValues([NaN, 0, 15, false, -22, '', undefined, 47, null])
+);
+////Solution 2:
+function flt(arr) {
+  return arr.filter(function myFunction(value, index, array) {
+    return value;
+  });
+}
+console.log(flt([NaN, 0, 15, false, -22, '', undefined, 47, null]));
+
+////Solution 3:
+const removeFalsey = arr => arr.filter(item => !!item)
+console.log(removeFalsey([NaN, 0, 15, false, -22, '', undefined, 47, null]));
+
+/* -------------------------- 25 ------------------------- */
+//25. Write a JavaScript function to sort the following array of objects by title value.
+var library = [
+  { author: 'Bill Gates', title: 'The Road Ahead', libraryID: 1254 },
+  { author: 'Steve Jobs', title: 'Walter Isaacson', libraryID: 4264 },
+  {
+    author: 'Suzanne Collins',
+    title: 'Mockingjay: The Final Book of The Hunger Games',
+    libraryID: 3245,
+  },
+];
+//Solution 1:
+function orderObjects(arr) {
+  let sorted = arr.sort((a, b) => {
+    return a.title.localeCompare(b.title);
+  });
+  console.log(sorted);
+}
+orderObjects(library);
+
+//Solution 2:
+function orderObjects(x, y) {
+  if (x.title < y.title) {
+    return -1;
+  }
+  if (x.title > y.title)
+    return 1;
+  return 0;
+}
+console.log(library.sort(orderObjects));
+
+/* -------------------------- 26 ------------------------- */
+//26. Write a JavaScript program to find a pair of elements (indices of the two numbers) in a given array whose sum equals a specific target number.
+//Solution 1:
+function pairForSum(arr, target) {
+  let sum;
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length - 1; j++) {
+      if (arr[i] + arr[j] === target) {
+         console.log(`${i},${j}`);
+      }
+    }
+  }
+}
+pairForSum([10, 20, 10, 40, 50, 60, 70], 50);
+//Solution 2:
+function twoSum(nums, target_num) {
+  const map = [];
+  const indexnum = [];
+
+  for (let x = 0; x < nums.length; x++) {
+    if (map[nums[x]] != null) {
+      var index = map[nums[x]];
+      indexnum[0] = index;
+      indexnum[1] = x;
+      break;
+    } else {
+      map[target_num - nums[x]] = x;
+    }
+  }
+  return indexnum;
+}
+console.log(twoSum([10, 20, 10, 40, 50, 60, 70], 50));
+
+/* -------------------------- 27 ------------------------- */
+//27. Write a JavaScript function to retrieve the value of a given property from all elements in an array.
+//Solution 1:
+const library = [
+  { author: 'Bill Gates', title: 'The Road Ahead', libraryID: 1254},
+  { author: 'Steve Jobs', title: 'Walter Isaacson', libraryID: 4264},
+  { author: 'Suzanne Collins', title: 'Mockingjay: The Final Book of The Hunger Games', libraryID: 3245}
+  ];
+
+function property_value(array, property_key) {
+   const arr = [];
+   let index = -1;
+   const arrlen = array.length;
+   let array_items;
+
+   while (++index < arrlen) {
+   array_items = array[index];
+
+ if (array_items.hasOwnProperty(property_key))
+     {
+  arr[arr.length] = array_items[property_key];
+     }
+ }
+
+   return arr;
+}
+
+console.log(property_value(library, 'title'));
+console.log(property_value(library, 'author'));
+
+//Solution 2:
+let retrivePropertyArray = (_arr, _prop) => {
+
+  let f = e => e[_prop];
+  return _arr.filter(f).map(f);
+
+  };
+  console.log(retrivePropertyArray(library, 'title'))
+
+//Solution 3:
+const retrivePropertyArray = (arr, property) => {
+  const f = element => element[property];
+  return arr.filter(f).map(f);
+};
+console.log(retrivePropertyArray(library, 'title'));
+
+/* -------------------------- 28 ------------------------- */
+//28. Write a JavaScript function to find the longest common starting substring in a set of strings.
+//Solution 1:
+function longest_common_starting_substring(arr) {
+  let commonWord = '';
+
+  for (let index = 0; index < arr.length; index++) {
+    for (let i = 0; i < arr[index].length; i++) {
+      if (arr[index][i] === arr[index + 1][i]) {
+        commonWord += arr[index][i];
+      }
+    }
+    break;
+  }
+
+  return commonWord;
+}
+
+console.log(longest_common_starting_substring(['google', 'go']));
+//Solution 2:
+function longest_common_starting_substring(arr) {
+  let shortestString = arr.reduce(
+    (a, b) => (a.length <= b.length ? a : b),
+    arr[0]
+  );
+  let commonChars = shortestString
+    .split('')
+    .map((_, i) => arr.every(str => str[i] === shortestString[i]));
+  let commonWord = shortestString.split('').filter((_, i) => commonChars[i]).join('');
+  return commonWord
+}
+console.log(longest_common_starting_substring(['google', 'goog', 'google']));
+
+//Solution 3:
+function longest_common_starting_substring(arr1) {
+  const arr = arr1.concat().sort();
+  console.log(arr)
+  const a1 = arr[0]; //SQLInjection
+  const a2 = arr[arr.length - 1]; //SQLTutorial
+  const L = a1.length;
+  let i = 0;
+  while (i < L && a1.charAt(i) === a2.charAt(i)) i++;
+  return a1.substring(0, i);
+}
+console.log(longest_common_starting_substring(['SQLTutorial','SQLInjection']));
+/* -------------------------- 29 ------------------------- */
+//29. Write a JavaScript function to fill an array with values (numeric, string with one character) within supplied bounds.
+//Solution 1:
+function num_string_range(x, y, n) {
+  let alphabetWithRange = [];
+
+  for (let i = x.charCodeAt(); i <= y.charCodeAt(); i += n) {
+    alphabetWithRange.push(String.fromCharCode(i).toLowerCase());
+  }
+  return alphabetWithRange;
+}
+console.log(num_string_range('A', 'Z', 2));
+
+//Solution 2:
+function num_string_range(x, y, n) {
+  let alphabet = Array.from(
+    { length: Math.floor((y.charCodeAt() - x.charCodeAt() + 1) / n) },
+    (_, i) => String.fromCharCode(x.charCodeAt() + i * n)
+  ).join('');
+  console.log(alphabet);
+}
+
+num_string_range('A', 'Z', 2);
+
+
 
