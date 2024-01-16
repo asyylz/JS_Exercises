@@ -1337,6 +1337,25 @@ console.log(move([10, 20, 30, 40, 50], 0, 2));
 console.log(move([10, 20, 30, 40, 50], 0, 3));
 console.log(move([1, 2, 3, 4, 5], 4, 1));
 //Solution 2:
+function move(arr, oldIndex, newIndex) {
+  while (oldIndex < 0) {
+    oldIndex += arr.length;
+  }
+  while (newIndex < 0) {
+    newIndex += arr.length;
+  }
+  if (newIndex >= arr.length) {
+    let k = newIndex - arr.length;
+    while (k-- + 1) {
+      arr.push(undefined);
+    }
+  }
+  console.log(arr.splice(oldIndex, 1))
+  arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
+  return arr;
+}
+console.log(move([10, 20, 30, 40, 50], 0, 9));
+console.log(move([10, 20, 30, 40, 50], -1, -2));
 
 /* -------------------------- 39 ------------------------- */
 //39. Write a JavaScript function to filter false, null, 0 and blank values from an array.
@@ -1364,17 +1383,187 @@ function filter_array_values(arr){
   return arr.filter(function myFunction(value){
   return value
   })
-  
+
   }console.log(filter_array_values([58, '', 'abcd', true, null, false, 0]))
 
+/* -------------------------- 40 ------------------------- */
+//40. Write a JavaScript function to generate an array of integer numbers, increasing one from the starting position, of a specified length.
+//Solution 1:
+function arrayRange(a,b) {
+  return (Array(...Array(b)).map((_,index)=> a + index))
+}
+console.log(arrayRange(1, 4));
+console.log(arrayRange(-6, 4));
 
+//Solution 2:
+function arrayRange(a, b) {
+   return Array.from({ length: b }, (_, index) => a + index);
+}
+console.log(arrayRange(1, 4));
+console.log(arrayRange(-6, 4));
 
+//Solution 3:
+function array_range(start, len) {
+  const arr = new Array(len);
+  for (let i = 0; i < len; i++, start++) {
+    arr[i] = start;
+  }
+  return arr;
+}
+console.log(array_range(1, 4));
+console.log(array_range(-6, 4));
 
+/* -------------------------- 41 ------------------------- */
+//41. Write a JavaScript function to generate an array between two integers of 1 step length.
+//Solution 1:
+function rangeBetween(start, end) {
+  return Array(...Array(end - start + 1)).map((_, index) => start + index);
+}
+console.log(rangeBetween(4, 8));
+console.log(rangeBetween(-4, 7));
+//Solution 2:
+function rangeBetween(start, end) {
+  return Array.from({ length: end - start + 1 }, (_, index) => start + index);
+}
+console.log(rangeBetween(4, 8));
+console.log(rangeBetween(-4, 7));
 
+//Solution 3:
+const func = (startNum, len) => {
+  var arr = [];
+  if (startNum < 0) {
+    for (var i = 0; i < len - startNum + 1; i++) {
+      arr[i] = i === 0 ? startNum : arr[i - 1] + 1;
+    }
+  } else {
+    for (var i = 0; i <= len - startNum; i++) {
+      arr[i] = startNum + i;
+    }
+  }
+  return arr;
+};
+console.log(func(-4, 7));
 
+/* -------------------------- 42 ------------------------- */
+//42. Write a JavaScript function to find unique elements in two arrays.
+//Solution 1:
+const difference = (arr1, arr2) => {
+ return (new Set(Array.from(arr1.concat(arr2)).flat(Infinity)))
+};
+console.log(difference([1, 2, 3], [100, 2, 1, 10]));
+console.log(difference([1, 2, 3, 4, 5], [1, [2], [3, [[4]]],[5,6]]));
 
+//Solution 2:
+function difference(arr1,arr2) {
+  const a1= flatten(arr1,true);
+  const a2= flatten(arr2,true);
 
+  const a=[];
+  const diff=[];
+  for(var i=0;i< a1.length;i++)
+    a[a1[i]]=false;
+  for(i=0;i< a2.length;i++)
+  if(a[a2[i]]===true)
+     { delete a[a2[i]];}
+    else a[a2[i]]=true;
+  for(const k in a)
+    diff.push(k);
+  return diff;
+}
 
+var flatten = (a, shallow, r) => {
+  if(!r){ r = [];}
+if (shallow) {
+  return r.concat(...a);
+  }
+   for(i=0; i< a.length; i++){
+        if(a[i].constructor == Array){
+            flatten(a[i],shallow,r);
+        }else{
+            r.push(a[i]);
+        }
+    }
+    return r;
+};
+console.log(difference([1, 2, 3], [100, 2, 1, 10]));
+console.log(difference([1, 2, 3, 4, 5], [1, [2], [3, [[4]]],[5,6]]));
+console.log(difference([1, 2, 3], [100, 2, 1, 10]));
+
+/* -------------------------- 43 ------------------------- */
+//43. Write a JavaScript function to create an array of arrays, ungrouping the elements in an array produced by zip.
+//Solution 1:
+function unzip(arr) {
+  const resultObject = {};
+
+  arr.forEach(innerArray => {
+    innerArray.forEach((value, index) => {
+      const type = typeof value;
+
+      if (!resultObject[type]) {
+        resultObject[type] = [];
+      }
+
+      resultObject[type].push(value);
+    });
+  });
+  const resultArray = Object.values(resultObject);
+  return resultArray;
+}
+
+console.log(
+  unzip([
+    ['a', 1, true],
+    ['b', 2, false],
+  ])
+);
+console.log(
+  unzip([
+    ['a', 1, true],
+    ['b', 2],
+  ])
+);
+
+//Solution 2:
+const unzip = arr =>
+  arr.reduce(
+    (acc, val) => (val.forEach((v, i) => acc[i].push(v)), acc),
+    Array.from({
+      length: Math.max(...arr.map(x => x.length))
+    }).map(x => [])
+  );
+console.log(unzip([['a', 1, true], ['b', 2, false]]));
+console.log(unzip([['a', 1, true], ['b', 2]]));
+/* -------------------------- 44 ------------------------- */
+//44. Write a JavaScript function to create an object from an array, using the specified key and excluding it from each value.
+//Solution 1: //ASK
+const indexOn = (arr, key) =>
+  arr.reduce((obj, v) => {
+    const { [key]: id,...data } = v;
+    obj[id] = data;
+    return obj;
+  }, {});
+
+console.log(indexOn([
+  { id: 10, name: 'apple' },
+  { id: 20, name: 'orange' },
+
+], x => x.id));
+
+/* -------------------------- 45 ------------------------- */
+//45. Write a JavaScript program to find all the unique values in a set of numbers.
+//Solution 1:
+function uniqueValues(arr) {
+  //return Array.from(new Set(arr))
+  return [...new Set(arr)]
+}
+console.log(uniqueValues([1, 2, 2, 3, 4, 4, 5]))
+
+//Solution 2:
+function uniqueValue(arr) {
+  return arr.filter((value, index) => arr.indexOf(value) === index);
+}
+console.log(uniqueValue([1, 2, 3, 4, 4, 5]));
+console.log(uniqueValue([1, -2, -2, 3, 4, -5, -6, -5]));
 
 
 const lorem =
