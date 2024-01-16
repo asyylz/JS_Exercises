@@ -1534,7 +1534,7 @@ const unzip = arr =>
 console.log(unzip([['a', 1, true], ['b', 2, false]]));
 console.log(unzip([['a', 1, true], ['b', 2]]));
 /* -------------------------- 44 ------------------------- */
-//44. Write a JavaScript function to create an object from an array, using the specified key and excluding it from each value.
+44. Write a JavaScript function to create an object from an array, using the specified key and excluding it from each value.
 //Solution 1: //ASK
 const indexOn = (arr, key) =>
   arr.reduce((obj, v) => {
@@ -1563,8 +1563,102 @@ function uniqueValue(arr) {
   return arr.filter((value, index) => arr.indexOf(value) === index);
 }
 console.log(uniqueValue([1, 2, 3, 4, 4, 5]));
+console.log()
 console.log(uniqueValue([1, -2, -2, 3, 4, -5, -6, -5]));
 
+/* -------------------------- 46 ------------------------- */
+//46. Write a JavaScript program to generate all permutations of an array's elements (including duplicates).
+//Solution 1://ASK
+const permutations = arr =>{
+  if(arr.lenght<= 2) return arr.length === 2 ? [arr, [arr[1], arr[2]]] :arr
+  return arr.reduce((acc, item, i) => acc.concat (permutations([...arr.slice(0,i)])))
+}
+
+//Solution 2:
+
+/* -------------------------- 47 ------------------------- */
+//47. Write a JavaScript program to remove all false values from an object or array.
+//Solution 1:
+const obj = {
+  a: null,
+  b: false,
+  c: true,
+  d: 0,
+  e: 1,
+  f: '',
+  g: 'a',
+  h: [null, false, '', true, 1, 'a'],
+  i: { j: 0, k: false, l: 'a' },
+};
+function filterFalsy(obj) {
+  return Object.keys(obj).reduce((acc, key) => {
+    const value = obj[key];
+    if (
+      value === null ||
+      value === false ||
+      value === 0 ||
+      value === '' ||
+      value === undefined
+    )
+      return acc;
+
+    if (Array.isArray(value)) {
+      const filteredArray = value.filter(
+        item =>
+          item !== null &&
+          value === false &&
+          value === 0 &&
+          value === '' &&
+          value === undefined
+      );
+      if (filteredArray.length > 0) {
+        acc[key] = filteredArray;
+      }
+    } else if (typeof value === 'object' && value !== null) {
+      const filteredObject = filterFalsy(value);
+      if (Object.keys(filteredObject).length > 0) {
+        acc[key] = filteredObject;
+      }
+    } else {
+      acc[key] = value;
+    }
+    return acc;
+  }, {});
+}
+console.log(filterFalsy(obj));
+
+//Solution 2:
+const compactObject = val => {
+  const data = Array.isArray(val) ? val.filter(Boolean) : val;
+  //console.log(data)
+  return Object.keys(data).reduce((acc, key) => {
+    const value = data[key];
+    if (Boolean(value))
+      acc[key] = typeof value === 'object' ? compactObject(value) : value;
+    return acc;
+  }, Array.isArray(val) ? [] : {});
+};
+
+const obj = {
+  a: null,
+  b: false,
+  c: true,
+  d: 0,
+  e: 1,
+  f: '',
+  g: 'a',
+  h: [null, false, '', true, 1, 'a'],
+  i: { j: 0, k: false, l: 'a' },
+};
+console.log(compactObject(obj));
+/* -------------------------- 48 ------------------------- */
+//48. Write a JavaScript program that takes an array of integers and returns false if every number is not prime. Otherwise, return true.
+//Solution 1:
+function everyNumberPrime(arr) {
+  
+}
+
+//Solution 2:
 
 const lorem =
   'Loremipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
