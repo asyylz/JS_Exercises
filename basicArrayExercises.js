@@ -1655,10 +1655,95 @@ console.log(compactObject(obj));
 //48. Write a JavaScript program that takes an array of integers and returns false if every number is not prime. Otherwise, return true.
 //Solution 1:
 function everyNumberPrime(arr) {
-  
+  let isEveryPrime = true;
+  arr.forEach(number => {
+    if (!isPrime(number)) {
+      isEveryPrime = false;
+    }
+  });
+  return isEveryPrime;
 }
 
+function isPrime(num) {
+  if (num <= 1) {
+    return false;
+  }
+  for (let i = 2; i <= Math.trunc(num * 0.5); i++) {
+    if (num % i === 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+console.log(everyNumberPrime([3,5,7]));
+
 //Solution 2:
+function test(arr_nums)
+ {
+  return arr_nums.every(n => !'1'.repeat(n).match(/^1?$|^(11+?)\1+$/));
+}
+nums = [2, 3, 5, 7]
+console.log("Original array of integers: "+nums)
+console.log("In the said array check every numbers are prime or not! "+test(nums));
+nums = [2, 3, 5, 7, 8]
+console.log("Original array of integers: "+nums)
+console.log("In the said array check every numbers are prime or not! "+test(nums));
+
+/* -------------------------- 49 ------------------------- */
+//49. Write a JavaScript program that takes an array of numbers and returns the third smallest number.
+//Solution 1:
+function nthSmallestNumber(arr, n) {
+  const sorted = arr.sort((a, b) => a - b);
+  return sorted[n];
+}
+console.log(nthSmallestNumber([2, 3, 0, 5, 7, 8, -2, -4], 2));
+
+//Solution 2:
+function nthSmallestNumber(arr, n) {
+  return arr[n]
+}
+const sortDescending = arr => {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length - i - 1; j++) {
+      if (arr[j + 1] < arr[j]) {
+        let temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+      }
+    }
+  }
+  return arr;
+};
+sortDescending([2, 3, 0, 5, 7, 8, -2, -4]);
+
+console.log(nthSmallestNumber(sortDescending([2, 3, 0, 5, 7, 8, -2, -4]), 2));
+
+/* -------------------------- 50 ------------------------- */
+//50. Write a JavaScript program that takes an array with mixed data type and calculates the sum of all numbers.
+//Solution 1:
+function mixedArraySum(arr) {
+  let sum = 0;
+  arr.filter(element => {
+    if (typeof element === 'number') {
+      sum += element;
+    }
+  });
+  return sum;
+}
+console.log(mixedArraySum([2, '11', 3, 'a2', false, 5, 7, 1]));
+
+//Solution 2:
+function mixedArraySum(arr) {
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (typeof arr[i] === 'number') {
+      sum += arr[i];
+    }
+  }
+  return sum;
+}
+console.log(mixedArraySum([2, '11', 3, 'a2', false, 5, 7, 1]));
 
 const lorem =
   'Loremipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
