@@ -1232,24 +1232,24 @@ function nthlargest(arr, n) {
 }
 console.log(nthlargest([43, 56, 23, 89, 88, 90, 99, 652], 4));
 //Solution 2:
-function nthlargest(arra, highest) {
+function nthlargest(arr, highest) {
   let x = 0;
   let y = 0;
-  let z = 0;
+  //let z = 0;
   let temp = 0;
-  const tnum = arra.length;
+  const len = arr.length;
   let flag = false;
   let result = false;
 
-  while (x < tnum) {
+  while (x < len) {
     y = x + 1;
 
-    if (y < tnum) {
-      for (z = y; z < tnum; z++) {
-        if (arra[x] < arra[z]) {
-          temp = arra[z];
-          arra[z] = arra[x];
-          arra[x] = temp;
+    if (y < len) {
+      for (let z = y; z < len; z++) {
+        if (arr[x] < arr[z]) {
+          temp = arr[z];
+          arr[z] = arr[x];
+          arr[x] = temp;
           flag = true;
         } else {
           continue;
@@ -1270,7 +1270,7 @@ function nthlargest(arra, highest) {
     }
   }
 
-  return arra[highest - 1];
+  return arr[highest - 1];
 }
 
 console.log(nthlargest([43, 56, 23, 89, 88, 90, 99, 652], 4));
@@ -1282,6 +1282,99 @@ function rondomItems(array){
    return array[Math.floor(Math.random() * array.length)]
 }
 console.log(rondomItems([254, 45, 212, 365, 2543]))
+
+/* -------------------------- 36 ------------------------- */
+//36. Write a JavaScript function to create a specified number of elements with a pre-filled numeric value array.
+//Solution 1:
+function array_filled(x, y) {
+  let result = [];
+  for (let i = 0; i < x; i++) {
+    result.push(y); ////Or result[i] = y;
+  }
+  return result;
+}
+console.log(array_filled(4, 11));
+
+//Solution 2:
+function array_filled(x, y) {
+ return Array(...Array(x)).map(Number.prototype.valueOf,y)
+}
+console.log(array_filled(4, 11));
+
+/* -------------------------- 37 ------------------------- */
+//37. Write a JavaScript function to create a specified number of elements with a pre-filled string value array.
+//Solution 1:
+function array_filled(n, str) {
+  return Array(...Array(n)).map(String.prototype.valueOf, str);
+}
+console.log(array_filled(3, 'default value'));
+//Solution 2:
+function array_filled(n, str) {
+  let arr = Array(n);
+  return arr.fill(str,0,n)
+}
+console.log(array_filled(3, 'default value'));
+
+/* -------------------------- 38 ------------------------- */
+//38. Write a JavaScript function to move an array element from one position to another.
+//Solution 1:
+function move(arr, index1, index2) {
+  let result = arr
+    .filter(
+      element => element !== arr[index1 >= 0 ? index1 : index1 + arr.length]
+    )
+    .toSpliced(
+      index2 >= 0 ? index2 : index2 + arr.length,
+      0,
+      arr[[index1 >= 0 ? index1 : index1 + arr.length]]
+    );
+  console.log(arr);
+  return result;
+}
+
+console.log(move([10, 20, 30, 40, 50], -1, -2));
+console.log(move([10, 20, 30, 40, 50], 0, 2));
+console.log(move([10, 20, 30, 40, 50], 0, 3));
+console.log(move([1, 2, 3, 4, 5], 4, 1));
+//Solution 2:
+
+/* -------------------------- 39 ------------------------- */
+//39. Write a JavaScript function to filter false, null, 0 and blank values from an array.
+//Solution 1:
+
+function filter_array_values(arr) {
+  return arr.filter(function myFunction(value, index, array) {
+    return value;
+  });
+}
+console.log(filter_array_values([58, '', 'abcd', true, null, false, 0]));
+//Solution 2:
+function filter_array_values(arr) {
+  let container = [];
+  arr.forEach(function (i) {
+    if (i) {
+      container.push(i);
+    }
+  });
+  return container
+}
+console.log(filter_array_values([58, '', 'abcd', true, null, false, 0]));
+//Solution 3:
+function filter_array_values(arr){
+  return arr.filter(function myFunction(value){
+  return value
+  })
+  
+  }console.log(filter_array_values([58, '', 'abcd', true, null, false, 0]))
+
+
+
+
+
+
+
+
+
 
 
 const lorem =
