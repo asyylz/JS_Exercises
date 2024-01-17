@@ -1745,6 +1745,54 @@ function mixedArraySum(arr) {
 }
 console.log(mixedArraySum([2, '11', 3, 'a2', false, 5, 7, 1]));
 
+/* -------------------------- 51 ------------------------- */
+//51. Write a JavaScript program to check if an array is a factor chain or not.
+function factorChainOrNot(arr) {
+  let isEveryFactor = false;
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i + 1] % arr[i] === 0) {
+      isEveryFactor = true;
+    } else {
+      isEveryFactor = false;
+    }
+  }
+  return `Array is ${isEveryFactor === false ? 'not' : ''} a factor chain`;
+}
+console.log(factorChainOrNot([2, 4, 8, 16, 32]));
+console.log(factorChainOrNot([2, 4, 16, 32, 68]));
+
+/* -------------------------- 52 ------------------------- */
+//52. Write a JavaScript program to get all the indexes where NaN is found in a given array of numbers and NaN.
+//Solution 1:
+function findIndexesOfNaN(arr) {
+  let indexArray = []
+  arr.forEach((element, index) => {
+    if(Number.isNaN(element)) {
+       indexArray.push(index)
+    }
+  });
+  return indexArray
+
+}
+console.log(findIndexesOfNaN([2, 4, NaN, 16, 32, NaN]))
+
+/* -------------------------- 53 ------------------------- */
+//53. Write a JavaScript program to count the number of arrays inside a given array.
+//Solution 1:
+function numberOfArrays(arr) {
+  let count = 0;
+  arr.forEach(element => {
+    if (Array.isArray(element)) {
+      count++;
+    }
+  });
+  return count
+}
+console.log(numberOfArrays([2, 8, [6],[4,5,6,], 3, 5, 3, 4, [5, 4]]))
+
+/* -------------------------- 54 ------------------------- */
+//Using letters in lorem20 generated n lengthed words
+//Solution 1:
 const lorem =
   'Loremipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
 
@@ -1775,6 +1823,9 @@ function wordGenerator(str, n) {
 
 wordGenerator(lorem, 6);
 
+/* -------------------------- 55 ------------------------- */
+//possible number of words generated from word of 'asiye'
+//Solution 1:
 const str = 'asiye';
 function shuffle(word) {
   let len = word.length;
