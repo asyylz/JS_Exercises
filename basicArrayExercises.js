@@ -1,4 +1,8 @@
 'use strict';
+/* ------------------------------------------------------ */
+/*    JavaScript Array - Exercises, Practice, Solution   */
+/* ------------------------------------------------------ */
+
 /* -------------------------- 1. ------------------------- */
 //1. Write a JavaScript function to check whether an `input` is an array or not.
 //Solution 1:
