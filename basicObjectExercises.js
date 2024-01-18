@@ -362,3 +362,233 @@ var sort_by = function (field_name, reverse, initial) {
 var newobj = library.sort(sort_by('libraryID', true, parseInt));
 
 console.log(newobj);
+
+/* -------------------------- 11 ------------------------- */
+//11. Write a JavaScript function to print all the methods in a JavaScript object.
+//Solution 1:
+function findAllMethods(obj) {
+  return Object.getOwnPropertyNames(obj).filter(function (property) {
+    return typeof obj[property] == "function";
+  });
+}
+console.log(findAllMethods(Math));
+console.log(findAllMethods(Array));
+
+/* -------------------------- 12 ------------------------- */
+//12. Write a JavaScript function to parse an URL.
+//Solution 1:
+function parse_URL(url) {
+  var a = document.createElement("a");
+  a.href = url;
+  return {
+    source: url,
+    protocol: a.protocol.replace(":", ""),
+    host: a.hostname,
+    port: a.port,
+    query: a.search,
+    params: (function () {
+      var ret = {},
+        seg = a.search.replace(/^\?/, "").split("&"),
+        len = seg.length,
+        i = 0,
+        s;
+      for (; i < len; i++) {
+        if (!seg[i]) {
+          continue;
+        }
+        s = seg[i].split("=");
+        ret[s[0]] = s[1];
+      }
+      return ret;
+    })(),
+    file: (a.pathname.match(/\/([^\/?#]+)$/i) || [, ""])[1],
+    hash: a.hash.replace("#", ""),
+    path: a.pathname.replace(/^([^\/])/, "/$1"),
+    relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [, ""])[1],
+    segments: a.pathname.replace(/^\//, "").split("/"),
+  };
+}
+
+console.log(
+  parse_URL("https://github.com/pubnub/python/search?utf8=%E2%9C%93&q=python")
+);
+
+/* -------------------------- 13 ------------------------- */
+//13. Write a JavaScript function to retrieve all the names of an object's own and inherited properties.
+//Solution 1:
+function isObject(obj) {
+  const type = typeof obj;
+  return type === "function" || (type === "object" && !!obj);
+}
+//Solution 2:
+function allKeys(obj) {
+  if (!isObject(obj)) return [];
+  const keys = [];
+  for (let key in obj) keys.push(key);
+  return keys;
+}
+function isObject(obj) {
+  let type = typeof obj;
+  return type === "function" || (type === "object" && !!obj);
+}
+
+function Student(name) {
+  this.name = name;
+}
+Student.prototype.rollno = true;
+console.log(allKeys(new Student("Sara")));
+
+/* -------------------------- 14 ------------------------- */
+//14. Write a JavaScript function to retrieve all the values of an object's properties.
+//Solution 1:
+const person = { name: "John", age: 30, city: "New York" };
+function retrieveValues(obj) {
+  return Object.values(obj).map((value) => value);
+}
+console.log(retrieveValues(person));
+//Solution 2:
+function all_values(obj) {
+  var keys = _keys(obj);
+  var length = keys.length;
+  var values = Array(length);
+  for (var i = 0; i < length; i++) {
+    values[i] = obj[keys[i]];
+  }
+  return values;
+}
+function _keys(obj)
+{
+  if (!isObject(obj)) return [];
+  if (Object.keys) return Object.keys(obj);
+  var keys = [];
+  for (var key in obj) if (_.has(obj, key)) keys.push(key);
+  return keys;
+}
+function isObject(obj)
+{
+  var type = typeof obj;
+  return type === 'function' || type === 'object' && !!obj;
+}
+console.log(all_values({red: "#FF0000", green: "#00FF00", white: "#FFFFFF"}));
+
+/* -------------------------- 15 ------------------------- */
+//15. Write a JavaScript function to convert an object into a list of `[key, value]` pairs.
+//Solution 1:
+const person = { name: "John", age: 30, city: "New York" };
+function keyValuePairs(obj) {
+  return Object.entries(obj).map(([key, value]) => {
+    return [key, value];
+  });
+}
+console.log(keyValuePairs(person));
+
+//Solution 2:
+function keyValuePair(obj) {
+let key = Object.getOwnPropertyNames(obj);
+let value = Object.values(obj);
+let temp = [];
+for (let i = 0; i < Object.values(obj).length; i++) {
+temp[i] = [key[i],value[i]];
+}
+console.log(temp);
+}
+
+var obj = {
+name : 'rahul',
+roll : 11,
+age : 30
+};
+
+keyValuePair(obj);
+
+/* -------------------------- 16 ------------------------- */
+//16. Write a JavaScript function to get a copy of the object where the keys become the values and the values are the keys.
+//Solution 1:
+const person = { name: "John", age: 30, city: "New York" };
+function keyValuePairs(obj) {
+  let temp = {};
+  Object.keys(obj).map((key) => {
+    temp[obj[key]] = key;
+  });
+  return temp;
+}
+
+console.log(keyValuePairs(person));
+
+//Solution 2:
+const invert_key_value = (obj) =>
+  Object.entries(obj).reduce((acc, cur) => {
+    acc[cur[1]] = cur[0];
+    return acc;
+  }, {});
+console.log(keyValuePairs(person));
+
+//Solution 3:
+var test = {
+  a: 10,
+  b: 11,
+  c: 12,
+  d: 13,
+  e: 14,
+  f: -1,
+};
+var numbers = {
+  zero: 0,
+  one: 1,
+  two: 2,
+  three: 3,
+  four: 4,
+};
+function reverseKeyValue(obj) {
+  let temp = {};
+  for (let key in obj) {
+    if (isObject(obj)) temp[obj[key]] = key;
+  }
+  return temp;
+}
+function isObject(obj) {
+  let type = typeof obj;
+  return type === "function" || (type === "object" && !!obj);
+}
+console.log(reverseKeyValue(test));
+console.log(reverseKeyValue(numbers));
+/* -------------------------- 17 ------------------------- */
+//17. Write a JavaScript function to check whether an object contains a given property.
+//Solution 1:
+var test = {
+  a: 10,
+  b: 11,
+  c: 12,
+  d: 13,
+  e: 14,
+  f: -1,
+};
+function checkPropertyName(obj, propertyName) {
+  for (const key in obj) {
+    if (key === propertyName) {
+      return true;
+    }
+  }
+  return false;
+}
+console.log(checkPropertyName(test, "a"));
+
+//Solution 2:
+function checkPropertyName(obj, propertyName) {
+  let found = false;
+  Object.keys(obj).forEach((key) => {
+    if (key === propertyName) {
+      found = true;
+    }
+  });
+  return found;
+}
+console.log(checkPropertyName(test, "w"));
+/* -------------------------- 18 ------------------------- */
+//18. Write a JavaScript function to check whether a given value is a DOM element.
+//Solution 1:
+function isDOMElement(obj) {
+  return !!(obj && obj.nodeType === 1);
+}
+console.log(isDOMElement(jQuery('body')[0]));
+
