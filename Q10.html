@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calculator</title>
+        <style>
+    body {
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    p {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #333;
+    }
+        </style>
+    </head>
+    <body>
+        <form>
+            <label for="firstNumber">1st Number</label>
+            <input type="text" id="firstNumber">
+            <label for="secondNumber">2nd Number</label>
+            <input type="text" id="secondNumber">
+            <button class="btn__multiply">Multiply</button>
+            <button class="btn__divide">Divide</button>
+            <p class="result__value"></p>
+        </form>
+        <script src="/JavaScriptBasic.js"></script>
+        <!-- <script>
+            const firstNumber = document.getElementById("firstNumber");
+            const secondNumber = document.getElementById("secondNumber");
+            const btnMultiply = document.querySelector(".btn__multiply");
+            const btnDivide = document.querySelector(".btn__divide");
+            const resultValue = document.querySelector(".result__value");
+
+            btnMultiply.addEventListener("click", function (e) {
+                e.preventDefault();
+                const result = Number(firstNumber.value) * Number(secondNumber.value);
+                resultValue.textContent = result;
+            });
+
+            btnDivide.addEventListener("click", function (e) {
+                e.preventDefault();
+                const result = Number(firstNumber.value) / Number(secondNumber.value);
+                resultValue.textContent = result;
+            });
+        </script> -->
+    </body>
+</html>

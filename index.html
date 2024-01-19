@@ -3,13 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/style.css">
         <title>JS Exercises</title>
         <style>
             body {padding-top:50px}
         </style>
-    
     </head>
-    <body>
+    <body onload="animateString('target')">
+        <pre id="target">I love JavaScript</pre>
         <h1 style="background-color: aqua; color: rgb(74, 8, 189); display: flex; justify-content: center; align-items: center;">JS PLAYGROUND</h1>
         <input type="text" id="text1"></input>
         <input
@@ -25,9 +26,14 @@
             onclick="display_array();"
         ></input>
         <div id="Result"></div>
+        <p>Click the button to print the current page.</p>
+        <button onclick="printCurrentPage()">Print this page</button>
+        
+
         <script src="playground.js"></script>
         <script src="Q1-Q20.js"></script>
         <script src="/basicArrayExercises.js"></script>
         <script src="/basicObjectExercises.js"></script>
+        <script src="/JavaScriptBasic.js"></script>
     </body>
 </html>
