@@ -170,7 +170,7 @@ const leftDays = diff /(60*60*24*1000)
 console.log(leftDays.toFixed(0))
 
 /* -------------------------- 10. ------------------------- */
-10. Write a JavaScript program to calculate multiplication and division of two numbers (input from the user).
+//10. Write a JavaScript program to calculate multiplication and division of two numbers (input from the user).
 //Solution 1:
 const firstNumber = document.getElementById("firstNumber");
 const secondNumber = document.getElementById("secondNumber");
@@ -211,11 +211,11 @@ function divideBy() {
 }
 
 /* -------------------------- 11. ------------------------- */
-11. Write a JavaScript program to convert temperatures to and from Celsius, Fahrenheit.
-[ Formula : c/5 = (f-32)/9 [ where c = temperature in Celsius and f = temperature in Fahrenheit ]
-Expected Output :
-60°C is 140 °F
-45°F is 7.222222222222222°C
+//11. Write a JavaScript program to convert temperatures to and from Celsius, Fahrenheit.
+// [ Formula : c/5 = (f-32)/9 [ where c = temperature in Celsius and f = temperature in Fahrenheit ]
+// Expected Output :
+// 60°C is 140 °F
+// 45°F is 7.222222222222222°C
 //Solution 1:
 /* ----------------------- Celsius ---------------------- */
 function celsiusToFahrenheit(F){
@@ -276,3 +276,56 @@ function newDif(n) {
 console.log(newDif(33));
 console.log(newDif(9));
 
+/* -------------------------- 16.------------------------- */
+//16. Write a JavaScript program to compute the sum of the two given integers. If the two values are the same, then return triple their sum.
+Solution 1:
+const sum = (a, b) => {
+ return console.log(a === b ? (a + b) * 3 : a + b);
+};
+sum(5,6)
+sum(5,5)
+
+/* -------------------------- 17.------------------------- */
+//17. Write a JavaScript program to compute the absolute difference between a specified number and 19. Returns triple the absolute difference if the specified number is greater than 19.
+//Solution 1:
+const diff = (a) => {
+  return console.log(a < 19 ? 19 - a : a - 19);
+};
+diff(6);
+diff(11);
+
+/* -------------------------- 18.------------------------- */
+//18. Write a JavaScript program to check a pair of numbers and return true if one of the numbers is 50 or if their sum is 50.
+//Solution 1:
+const trueOrFalse = (a, b) => {
+  if (a === 50 || b === 50 || a + b === 50) return true;
+  return false;
+};
+console.log(trueOrFalse(10, 30));
+console.log(trueOrFalse(20, 30));
+
+/* -------------------------- 19.------------------------- */
+//19. Write a JavaScript program to check whether a given integer is within 20 of 100 or 400.
+//Solution 1:
+const check = (number) => {
+  if ((number > 80 && number < 101) || (number > 379 && number < 401)) {
+    return true;
+  }
+  return false;
+};
+console.log(check(89));
+console.log(check(401));
+
+/* -------------------------- 20.------------------------- */
+//20. Write a JavaScript program to check two given integers whether one is positive and another one is negative.
+//Solution 1:
+function checkNegativeOrPozitive(a, b) {
+  if ((a < 0 && b > 0) || (a > 0 && b < 0)) {
+    return true;
+  }
+  return false;
+}
+console.log(checkNegativeOrPozitive(6, -4));
+console.log(checkNegativeOrPozitive(-6, 4));
+console.log(checkNegativeOrPozitive(6, 6));
+console.log(checkNegativeOrPozitive(-6, -6));
