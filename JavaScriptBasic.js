@@ -329,3 +329,133 @@ console.log(checkNegativeOrPozitive(6, -4));
 console.log(checkNegativeOrPozitive(-6, 4));
 console.log(checkNegativeOrPozitive(6, 6));
 console.log(checkNegativeOrPozitive(-6, -6));
+
+/* -------------------------- 21.------------------------- */
+21. Write a JavaScript program to create another string by adding "Py" in front of a given string. If the given string begins with "Py" return the original string.
+//Solution 1:
+function addPy(str) {
+  if (str[0] === "P" && str[1] === "y") {
+    return str;
+  }
+  return "Py" + str;
+}
+console.log(addPy("asiye"));
+//Solution 2:
+const str = "asiye";
+str.startsWith("Py") ? console.log(str) : console.log("Py" + str);
+
+/* -------------------------- 22.------------------------- */
+//22. Write a JavaScript program to remove a character at the specified position in a given string and return the modified string.
+//Solution 1:
+const amendedStr = (str, n) => {
+  return str.replace(str[n], '');
+};
+console.log(amendedStr("asiye", 2));
+
+//Solution 2:
+const amendedStr = (str, n) => {
+  return str.slice(0, n) + str.slice(n, 1);
+};
+console.log(amendedStr("asiye", 4));
+
+/* -------------------------- 23.------------------------- */
+//23. Write a JavaScript program to create a new string from a given string by changing the position of the first and last characters. The string length must be broader than or equal to 1.
+//Solution 1:
+function swapChars(str) {
+  if (str.length > 1) {
+    return (
+      str.slice(str.length - 1) + str.slice(1, str.length - 1) + str.slice(0, 1)
+    );
+  }
+}
+console.log(swapChars("apple"));
+
+/* -------------------------- 24.------------------------- */
+//24. Write a JavaScript program to create another string from a given string with the first character of the given string added to the front and back.
+//Solution 1:
+function swapChars1(str) {
+  if (str.length > 1) {
+    return (
+        str.slice(0, 1) + str.slice(0, str.length) + str.slice(0, 1)
+    );
+  }
+}
+console.log(swapChars1("apple"));
+
+/* -------------------------- 25.------------------------- */
+//25. Write a JavaScript program to check whether a given positive number is a multiple of 3 or 7.
+//Solution 1:
+const checkDivisor = (num) => {
+  if (num% 3 === 0 || num % 7 === 0) {
+    return true;
+  }
+  return false;
+};
+console.log(checkDivisor(9))
+console.log(checkDivisor(14))
+console.log(checkDivisor(13))
+/* -------------------------- 26.------------------------- */
+//26. Write a JavaScript program to create a string from a given string. This is done by taking the last 3 characters and adding them at both the front and back. The string length must be 3 or more.
+//Solution 1:
+function swapChars1(str) {
+  if (str.length > 2) {
+    return (
+        str.slice(str.length-3, str.length) + str + str.slice(str.length-3, str.length)
+    );
+  }
+}
+console.log(swapChars1("apple"));
+
+//Solution 2:
+function lastThree(str) {
+  return str.length >= 3
+    ? str.slice(-3) + str + str.slice(-3)
+    : "must be 3 chars at least";
+}
+console.log(lastThree("apple"));
+/* -------------------------- 27.------------------------- */
+//27. Write a JavaScript program to check whether a string starts with 'Java' if it does not otherwise.
+//Solution 1:
+const checkJava = (str) => {
+str.startsWith("Java") ? console.log(true) : console.log(false);
+};
+checkJava('JavaScript')
+
+/* -------------------------- 28.------------------------- */
+//28. Write a JavaScript program to check whether two given integer values are in the range 50..99 (inclusive). Return true if either of them falls within the range.
+//Solution 1:
+const check50_99 = (n1,n2) => {
+    ((n1 <100 && n1 > 49) || (n2 <100 && n2 > 49)) ? console.log(true) : console.log(false)
+}
+check50_99(55,18)
+check50_99(59,67)
+/* -------------------------- 29.------------------------- */
+//29. Write a JavaScript program to check whether three given integer values are in the range 50..99 (inclusive). Return true if one or more of them are in the specified range.
+//Solution 1:
+function threeAtRange(...number) {
+  let truth = number.filter((num) => num > 49 && num < 100);
+  return truth.length > 0;
+}
+console.log(threeAtRange(13, 79, 78));
+
+/* -------------------------- 30.------------------------- */
+//30. Write a JavaScript program to check whether a string "Script" appears at the 5th (index 4) position in a given string. If "Script" appears in the string, return the string without "Script" otherwise return the original one.
+//Solution 1:
+const output = (str) => {
+  str.slice(4, str.length) === "script"
+    ? console.log(str.slice(0, 4))
+    : console.log(str);
+};
+
+output("Javascript");
+
+//Solution 2:
+function chk(str) {
+  if (str.substring(4, str.length) == "Script") {
+    return str.substring(0, 4);
+  } else {
+    return str;
+  }
+}
+console.log(chk("JavaScript"));
+console.log(chk("Python"));
