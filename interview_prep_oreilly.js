@@ -39,19 +39,41 @@ Encapsulation – Helps keep your code modular and prevents accidental variable 
 })(); // returns 10
 
 // Question 3 : Variable Scope Problem Creating Private Scope
-/* If your code used var instead of let, all buttons would show "Button 6" when clicked. This happens because var is function-scoped, meaning all event handlers would share the same i, which becomes 6 after the loop. */
+// /* If your code used var instead of let, all buttons would show "Button 6" when clicked. This happens because var is function-scoped, meaning all event handlers would share the same i, which becomes 6 after the loop. */
+// function createButtons() {
+//   for (var i = 1; i <= 5; i++) {
+//     (function (i) {
+//       // IIFE creates a new scope
+//       let body = document.getElementsByTagName('body')[0];
+//       let button = document.createElement('button');
+//       button.innerHTML = 'Button ' + i;
+//       button.onclick = function () {
+//         alert('This is button ' + i);
+//       };
+//       body.appendChild(button);
+//     })(i);
+//   }
+// }
+// createButtons();
+
+// Question 4 : Update of Question 3
 function createButtons() {
   for (var i = 1; i <= 5; i++) {
-    (function (i) {
-      // IIFE creates a new scope
-      let body = document.getElementsByTagName('body')[0];
-      let button = document.createElement('button');
-      button.innerHTML = 'Button ' + i;
-      button.onclick = function () {
-        alert('This is button ' + i);
-      };
-      body.appendChild(button);
-    })(i);
+    // IIFE creates a new scope
+    var body = document.getElementsByTagName('body')[0];
+    var button = document.createElement('button');
+    button.innerHTML = 'Button ' + i;
+    addClickEvent(button, i);
+    body.appendChild(button);
   }
 }
+
 createButtons();
+
+function addClickEvent(button, num) {
+  button.onclick = function () {
+    alert('This is button ' + num);
+  };
+}
+
+// Question 5 : Clousers
