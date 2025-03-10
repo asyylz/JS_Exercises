@@ -293,3 +293,19 @@ car1.getCarDescription.apply(car3, [300, 2012, 'black']); // returns This car is
   console.log('List 2 : ',list2); // returns [1, 2, 3, 4, 5]
 
 
+// Quesition 16 : Singly or Doubly Invoked Function
+function getTotal() {
+  var args = Array.prototype.slice.call(arguments); // we are not passing arguments but we are still have access to arguments
+
+  if (args.length === 2) {
+    return args[0] + args[1];
+  } else if (args.length === 1) {
+    return function (num2) {
+      return args[0] + num2;
+    };
+  }
+  
+}
+
+console.log(getTotal(10, 20));
+console.log(getTotal(5)(40));
