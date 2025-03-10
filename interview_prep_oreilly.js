@@ -168,7 +168,7 @@ var mycar = {
     console.log(self.color);
     (function () {
       // we are loosing refference to this keyword, and ending up refferencing to global object and we dont have color property in global scope
-      console.log(this.color);
+      //console.log(this.color);
       console.log(self.color);
     })();
   },
@@ -182,10 +182,36 @@ mycar.logColor(); // returns Blue
 === is used for comparision between two variables but this will check strict type, which means it will check datatype and compare two values.
 */
 
+// Question 9 : Event Bubbling
 var a = 10;
 function test() {
-  console.log("Value of a: ",a);
+  console.log('Value of a: ', a); // returns undefined
   var a = 5;
-
 }
 test(); // returns undefined
+
+// Question 10 : Use Strict
+
+('use strict');
+city = 'London';
+console.log(city); // with use strict returns ReferenceError: city is not defined
+
+function myFunc(a, a, b) {
+  console.log(a, a, b);
+}
+
+myFunc(1, 2, 3); // returns 2 2 3 without use strict second a overrided the first a
+
+//Question 11 : Currying function use case
+
+function getTraveltime(distance){
+  return function(speed){
+    return distance/speed;
+  }
+}
+const travelTimeBosNyc = getTraveltime(400);
+const travelTimeMiamiAtlanta = getTraveltime(600);
+console.log(travelTimeBosNyc(100)); // returns 4
+console.log(travelTimeMiamiAtlanta(100)); // returns 6
+
+// Question 12 : IIFE use case
