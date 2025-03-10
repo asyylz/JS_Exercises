@@ -77,3 +77,19 @@ function addClickEvent(button, num) {
 }
 
 // Question 5 : Clousers
+
+/* A closure is an inner function that has access to the outer (enclosing) function’s variables—scope chain. The closure has three scope chains: it has access to its own scope (variables defined between its curly brackets), it has access to the outer function’s variables, and it has access to the global variables. Same pattern is also parameters */
+const globalVariable = 'I am global';
+function outerFunction(param1) {
+  var outerVariable = 'I am outside!';
+  function innerFunction(param2) {
+    const innerVariable = 'I am inside!';
+    console.log(outerVariable);
+    console.log(innerVariable);
+    console.log(globalVariable);
+    console.log(param1);
+    console.log(param2);
+  }
+  innerFunction();
+}
+outerFunction();
