@@ -323,3 +323,35 @@ function logNumbers() {
 }
 
 logNumbers(); // returns 1 4 2 3
+
+// Question 18 : Create an object in different ways
+
+// 1-object literal syntax / straigth forward way
+const myBoat = {
+  length: 24,
+  maxSpeed: 45,
+  passengers: 14,
+  getLength: function() {
+    return this.length;
+  }
+}
+// 2- new keyword & object constructor
+const student = new Object();
+student.grade = 12;
+student.gradePointAverage = 3.7;
+student.classes = ['English', 'Algebra', 'Chemistry'];
+student.getClasses = function() {
+  return this.classes;
+}
+
+// 3- constructor function
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+Person.prototype.speak = function() {
+  console.log(`My name is ${this.name}`);
+}
+const newPerson = new Person('John', 25);
+newPerson.speak();
