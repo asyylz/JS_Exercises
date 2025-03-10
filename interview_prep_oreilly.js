@@ -204,14 +204,50 @@ myFunc(1, 2, 3); // returns 2 2 3 without use strict second a overrided the firs
 
 //Question 11 : Currying function use case
 
-function getTraveltime(distance){
-  return function(speed){
-    return distance/speed;
-  }
+function getTraveltime(distance) {
+  return function (speed) {
+    return distance / speed;
+  };
 }
 const travelTimeBosNyc = getTraveltime(400);
 const travelTimeMiamiAtlanta = getTraveltime(600);
 console.log(travelTimeBosNyc(100)); // returns 4
 console.log(travelTimeMiamiAtlanta(100)); // returns 6
 
-// Question 12 : IIFE use case
+// Question 12 : Counter Function
+
+function counter() {
+  let count =0
+  return function () {
+    count++;
+    return count;
+  }
+}
+
+console.log(counter()());
+console.log(counter()());
+
+const instanceOne = counter();
+const instanceTwo = counter();
+
+console.log('instanceOne', instanceOne());
+console.log('instanceOne', instanceOne());
+console.log('instanceOne', instanceOne());
+console.log('instanceTwo', instanceTwo());
+
+// Question 13 : Logging variables
+
+(function(){
+  // 'use strict';
+  //var x=y=200; reason is:
+  // var x = 200; // it is the case for x
+  // var y = 200;  but it is not the case for y
+  // y is a global variable var keyword is missing
+  y = 200;
+  var x = y;
+
+})()
+console.log('y', y); // returns 200
+console.log('x', x); // returns ReferenceError: x is not defined
+
+// Question 14 : Call & Apply Methods
