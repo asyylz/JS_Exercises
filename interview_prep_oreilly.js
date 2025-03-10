@@ -57,6 +57,8 @@ Encapsulation – Helps keep your code modular and prevents accidental variable 
 // createButtons();
 
 // Question 4 : Update of Question 3
+const { JSDOM } = require('jsdom');
+const { document } = new JSDOM(`<!DOCTYPE html><body></body>`).window;
 function createButtons() {
   for (var i = 1; i <= 5; i++) {
     // IIFE creates a new scope
@@ -93,3 +95,64 @@ function outerFunction(param1) {
   innerFunction();
 }
 outerFunction();
+
+// Question 6 : Thiskeyword
+/* The this keyword refers to the object it belongs to.
+It has different values depending on where it is used:
+In a method, this refers to the owner object.
+In a function, this refers to the global object.
+In a function, in strict mode, this is undefined.
+In an event, this refers to the element that received the event.
+Methods like call(), and apply() can refer this to any object.
+*/
+var house = {
+  price: 1000,
+  squareFeet: 2000,
+  owner: 'Taylor',
+  getPriceSquareFoot: function () {
+    return this.price / this.squareFeet;
+  },
+};
+console.log(house.price); // returns 1000
+console.log(house.getPriceSquareFoot()); // returns 0.5
+
+// Question 7 : Hoisting
+/* Hoisting is JavaScript's default behavior of moving declarations to the top.
+In JavaScript, a variable can be declared after it has been used.
+In other words; a variable can be used before it has been declared.
+*/
+
+console.log(color); // returns undefined
+var color = 'blue';
+console.log(color); // returns blue
+
+// Real code
+function getTotal() {
+  console.log(multiplier); // returns undefined var initilized to undifined
+  console.log(total); // returns ReferenceError: Cannot access 'valueToAdd' before initialization
+
+  let total = 0;
+
+  for (var i = 0; i < 10; i++) {
+    let valueToAdd = i;
+    var multiplier = 2;
+    total += valueToAdd * multiplier;
+  }
+  return total;
+}
+
+getTotal(); // returns 90
+
+// Under the hood code, when js interpreter reads the code how it hoists the variables
+function getTotal() {
+  let total;
+  var multiplier;
+  total = 0;
+  for (var i = 0; i < 10; i++) {
+    let valueToAdd;
+    valueToAdd = i;
+    multiplier = 2;
+    total += valueToAdd * multiplier;
+  }
+  return total;
+}
