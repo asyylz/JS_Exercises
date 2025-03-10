@@ -217,11 +217,11 @@ console.log(travelTimeMiamiAtlanta(100)); // returns 6
 // Question 12 : Counter Function
 
 function counter() {
-  let count =0
+  let count = 0;
   return function () {
     count++;
     return count;
-  }
+  };
 }
 
 console.log(counter()());
@@ -237,7 +237,7 @@ console.log('instanceTwo', instanceTwo());
 
 // Question 13 : Logging variables
 
-(function(){
+(function () {
   // 'use strict';
   //var x=y=200; reason is:
   // var x = 200; // it is the case for x
@@ -245,9 +245,33 @@ console.log('instanceTwo', instanceTwo());
   // y is a global variable var keyword is missing
   y = 200;
   var x = y;
-
-})()
+})();
 console.log('y', y); // returns 200
-console.log('x', x); // returns ReferenceError: x is not defined
+//console.log('x', x); // returns ReferenceError: x is not defined
 
 // Question 14 : Call & Apply Methods
+const car1 = {
+  brand: 'Porsche',
+  getCarDescription: function (cost, year, color) {
+    console.log(
+      'This car is a ' +
+        this.brand +
+        '. The price is $' +
+        cost +
+        '. The year is ' +
+        year +
+        '. The color is ' +
+        color
+    );
+  },
+};
+
+car1.getCarDescription(100, 2010, 'blue'); // returns This car is a Porsche. The price is $100. The year is 2010. The color is blue
+
+const car2 = {
+  brand: 'Lamborghini',
+}
+// use call() , we can change this's context
+
+ car1.getCarDescription.call(car2, 200, 2013, 'yellow'); // returns This car is a Lamborghini. The price is $200. The year is 2013. The color is yellow
+
