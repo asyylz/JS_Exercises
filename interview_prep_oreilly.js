@@ -275,3 +275,21 @@ const car2 = {
 
  car1.getCarDescription.call(car2, 200, 2013, 'yellow'); // returns This car is a Lamborghini. The price is $200. The year is 2013. The color is yellow
 
+// apply method
+const car3 ={
+  brand: 'Audi'
+}
+
+car1.getCarDescription.apply(car3, [300, 2012, 'black']); // returns This car is a Audi. The price is $300. The year is 2012. The color is black. Diff is we pass arguments as array.
+
+//Question 15: List, pass by value or reference
+ const list1 = [1, 2, 3, 4, 5];
+  //const list2 = list1; with giving reference to list1
+ // const list2 = list1.slice(); // with slice we are creating a new array
+ // const list2= list1.concat([]); // with concat we are creating a new array
+ // or
+ const list2 = [...list1]; // with spread operator we are creating a new array
+  list1.push(6, 7, 8);
+  console.log('List 2 : ',list2); // returns [1, 2, 3, 4, 5]
+
+
