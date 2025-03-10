@@ -163,7 +163,7 @@ for (var i = 0; i < arr1.length; i++) {
 console.log(arr2);
 
 /* -------------------------- 8 ------------------------- */
-8. Write a JavaScript program to find the most frequent item in an array.
+//8. Write a JavaScript program to find the most frequent item in an array.
 //Solution 1:
 var arr1 = [3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3];
 function maxRepeat(arr) {
