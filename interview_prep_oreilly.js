@@ -270,28 +270,27 @@ car1.getCarDescription(100, 2010, 'blue'); // returns This car is a Porsche. The
 
 const car2 = {
   brand: 'Lamborghini',
-}
+};
 // use call() , we can change this's context
 
- car1.getCarDescription.call(car2, 200, 2013, 'yellow'); // returns This car is a Lamborghini. The price is $200. The year is 2013. The color is yellow
+car1.getCarDescription.call(car2, 200, 2013, 'yellow'); // returns This car is a Lamborghini. The price is $200. The year is 2013. The color is yellow
 
 // apply method
-const car3 ={
-  brand: 'Audi'
-}
+const car3 = {
+  brand: 'Audi',
+};
 
 car1.getCarDescription.apply(car3, [300, 2012, 'black']); // returns This car is a Audi. The price is $300. The year is 2012. The color is black. Diff is we pass arguments as array.
 
 //Question 15: List, pass by value or reference
- const list1 = [1, 2, 3, 4, 5];
-  //const list2 = list1; with giving reference to list1
- // const list2 = list1.slice(); // with slice we are creating a new array
- // const list2= list1.concat([]); // with concat we are creating a new array
- // or
- const list2 = [...list1]; // with spread operator we are creating a new array
-  list1.push(6, 7, 8);
-  console.log('List 2 : ',list2); // returns [1, 2, 3, 4, 5]
-
+const list1 = [1, 2, 3, 4, 5];
+//const list2 = list1; with giving reference to list1
+// const list2 = list1.slice(); // with slice we are creating a new array
+// const list2= list1.concat([]); // with concat we are creating a new array
+// or
+const list2 = [...list1]; // with spread operator we are creating a new array
+list1.push(6, 7, 8);
+console.log('List 2 : ', list2); // returns [1, 2, 3, 4, 5]
 
 // Quesition 16 : Singly or Doubly Invoked Function
 function getTotal() {
@@ -304,8 +303,23 @@ function getTotal() {
       return args[0] + num2;
     };
   }
-  
 }
 
 console.log(getTotal(10, 20));
 console.log(getTotal(5)(40));
+
+// Question 17 : Order of console.log
+
+function logNumbers() {
+  console.log(1);
+  setTimeout(() => {
+    console.log(2);
+  });
+
+  setTimeout(() => {
+    console.log(3);
+  }, 0);
+  console.log(4);
+}
+
+logNumbers(); // returns 1 4 2 3
