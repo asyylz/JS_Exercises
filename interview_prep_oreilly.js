@@ -156,3 +156,36 @@ function getTotal() {
   }
   return total;
 }
+
+// Question 8 : Scope and "self"
+this.color = 'red';
+var mycar = {
+  name: 'Toyota',
+  color: 'Blue',
+  logColor: function () {
+    var self = this;
+    console.log(this.color);
+    console.log(self.color);
+    (function () {
+      // we are loosing refference to this keyword, and ending up refferencing to global object and we dont have color property in global scope
+      console.log(this.color);
+      console.log(self.color);
+    })();
+  },
+};
+
+mycar.logColor(); // returns Blue
+
+// Question 8 : == vs ===
+/*
+== is used for comparison between two variables irrespective of the datatype of variable.
+=== is used for comparision between two variables but this will check strict type, which means it will check datatype and compare two values.
+*/
+
+var a = 10;
+function test() {
+  console.log("Value of a: ",a);
+  var a = 5;
+
+}
+test(); // returns undefined
